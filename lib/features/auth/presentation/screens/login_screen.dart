@@ -1,4 +1,4 @@
-import 'package:driver_app/core/screens/main_app_screen.dart';
+import 'package:driver_app/core/main_app_screen.dart';
 import 'package:driver_app/features/auth/presentation/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 class LoginScreen extends StatelessWidget {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,6 @@ class LoginScreen extends StatelessWidget {
               });
             }
             return Column(
-              
               children: [
                 TextField(
                   controller:_emailController,

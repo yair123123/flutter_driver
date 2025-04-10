@@ -1,3 +1,4 @@
+import 'package:driver_app/core/settings/presentation/screens/settings_screen.dart';
 import 'package:driver_app/features/auth/presentation/providers/auth_provider.dart';
 import 'package:driver_app/features/rides/presentation/screens/list_screen.dart';
 import 'package:driver_app/features/rides/presentation/screens/map_screen.dart';
@@ -5,13 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MainAppScreen extends StatefulWidget {
+  const MainAppScreen({super.key});
+
+  @override
   _MainAppScreen createState() => _MainAppScreen();
 }
 
 class _MainAppScreen extends State<MainAppScreen> {
   int _selectedIndex = 0;
 
-  List<Widget> _screens = [ListScreen(), MapScreen()];
+  final List<Widget> _screens = [ListScreen(), MapScreen()];
 
   void _onTapp(int index) {
     setState(() {
@@ -30,7 +34,7 @@ class _MainAppScreen extends State<MainAppScreen> {
             onPressed:
                 () => Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (_) => MainAppScreen()),
+                  MaterialPageRoute(builder: (_) => SettingsScreen()),
                 ),
             icon: Icon(Icons.settings),
           ),

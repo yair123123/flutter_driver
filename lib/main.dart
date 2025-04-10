@@ -1,3 +1,8 @@
+import 'package:driver_app/core/settings/data/data_source/settings_local_data_source.dart';
+import 'package:driver_app/core/settings/data/settings_repository_impl.dart';
+import 'package:driver_app/core/settings/domain/use_cases/get_settings.dart';
+import 'package:driver_app/core/settings/domain/use_cases/set_settings.dart';
+import 'package:driver_app/core/settings/presentation/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'features/auth/data/datasources/auth_remote_datasource.dart';
@@ -11,12 +16,22 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
   Widget build(BuildContext context) {
-    final repositoryImpl = AuthRepositoryImpl(AuthRemoteDatasource());
+    final authRepository = AuthRepositoryImpl(AuthRemoteDatasource());
+    final settingsRepository = SettingsRepositoryImpl(SettingsLocalDataSource());
+    
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => AuthProvider(Login(repositoryImpl)),
+          create: (_) => AuthProvider(Login(authRepository)),
+        ),
+        ChangeNotifierProvider(create: (_) => 
+        SettingsProvider(
+          GetSettings(settingsRepository),
+           SetSettings(settingsRepository))
         ),
       ],
       child: MaterialApp(
