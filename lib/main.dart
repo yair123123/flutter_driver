@@ -21,22 +21,41 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authRepository = AuthRepositoryImpl(AuthRemoteDatasource());
-    final settingsRepository = SettingsRepositoryImpl(SettingsLocalDataSource());
-    
+    final settingsRepository = SettingsRepositoryImpl(
+      SettingsLocalDataSource(),
+    );
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (_) => AuthProvider(Login(authRepository)),
         ),
-        ChangeNotifierProvider(create: (_) => 
-        SettingsProvider(
-          GetSettings(settingsRepository),
-           SetSettings(settingsRepository))
+        ChangeNotifierProvider(
+          create:
+              (_) => SettingsProvider(
+                GetSettings(settingsRepository),
+                SetSettings(settingsRepository),
+              ),
         ),
       ],
-      child: MaterialApp(
-        title: "Login",
-        home: LoginScreen(),
+      child: Consumer<SettingsProvider>(
+        builder: (context, settingsProvider, chiled) {
+          return MaterialApp(
+            title: "Driver App",
+            home: LoginScreen(),
+            theme: ThemeData(
+              brightness: Brightness.light,
+              primarySwatch: Colors.blue,
+              scaffoldBackgroundColor: Colors.white,
+            ),
+            darkTheme: ThemeData(
+              brightness: Brightness.dark,
+              primarySwatch: Colors.blueGrey,
+              scaffoldBackgroundColor: Colors.grey[900],
+            ),
+            themeMode: settingsProvider.settings.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          );
+        },
       ),
     );
   }
