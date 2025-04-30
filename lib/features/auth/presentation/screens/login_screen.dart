@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final userNameController = TextEditingController();
+  final idController = TextEditingController();
 
   LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(title: Text("my-app")),
       body: Padding(
@@ -29,23 +28,23 @@ class LoginScreen extends StatelessWidget {
             return Column(
               children: [
                 TextField(
-                  controller:_emailController,
-                  decoration : InputDecoration(labelText: "Email")
+                  controller:userNameController,
+                  decoration : InputDecoration(labelText: "Username")
                 ),
                 TextField(
-                  controller:_passwordController,
-                  decoration : InputDecoration(labelText: "Password"),
+                  controller:idController,
+                  decoration : InputDecoration(labelText: "Id"),
                   obscureText: true,
                 ),
                 SizedBox(height: 10,),
                 if (provider.is_loading) CircularProgressIndicator(),
                 ElevatedButton(onPressed:() => provider.login(
-                  _emailController.text,
-                  _passwordController.text
+                  userNameController.text,
+                  idController.text
                 ),            
                   child: Text("Login"),),
                 if (provider.user != null)
-                Text("You are logged in as ${provider.user!.email}")
+                Text("You are logged in as ${provider.user!.userName}")
               ]
               );
           },
