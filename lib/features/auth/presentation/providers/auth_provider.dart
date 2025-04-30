@@ -12,10 +12,10 @@ class AuthProvider extends ChangeNotifier {
   User? get user => _user;
   bool get is_loading => _is_loading;
 
-  Future<void> login(String email, String password) async{
+  Future<void> login(String username, String password) async{
     _is_loading = true;
     notifyListeners();
-    _user = await loginUseCase(email,password);
+    _user = await loginUseCase(username,password);
     _is_loading = false;
     notifyListeners();
   }

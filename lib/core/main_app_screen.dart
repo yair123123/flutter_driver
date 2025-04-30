@@ -28,7 +28,7 @@ class _MainAppScreen extends State<MainAppScreen> {
     final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hello ${authProvider.user!.email}"),
+        title: Text("Hello ${authProvider.user!.userName}"),
         actions: [
           IconButton(
             onPressed:
