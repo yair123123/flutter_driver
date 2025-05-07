@@ -11,19 +11,18 @@ class UserDataSource {
   Future<User> getUser(String token) async {
     try {
       final response = await http.get(
-        Uri(host: url,path: "api/driver/get-driver"),
+        Uri.http(url, "api/driver/get-driver"),
         headers: {'Content-Type': 'application/json', "auth": token},
       );
-      
+
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         ResponseUser res = ResponseUser.fromJson(data);
-        if (res.success){
-          return res.content;
+        if (res.success) {
+          return res.content!;
         }
-        
-        return Future.error("שגיאה (${res.error})");
 
+        return Future.error("שגיאה (${res.error})");
       } else {
         return Future.error("שגיאה כללית בשרת (${response.statusCode})");
       }

@@ -21,7 +21,7 @@ class AuthProvider extends ChangeNotifier {
     this.validateToken,
     this.clearToken,
   );
-
+  late String? token; 
   AuthUser? get user => _user;
   bool get isLoading => _isLoading;
   String? _errorMessage;
@@ -40,6 +40,11 @@ class AuthProvider extends ChangeNotifier {
       _isLoading = true;
       notifyListeners();
       _user = await loginUseCase(username, password);
+      if (_user != null) {
+        token = _user!.jwt_token;
+      } else {
+        _errorMessage = "שגיאה לא ידועה";
+      }
     } catch (e) {
       _errorMessage = e.toString();
     } finally {
@@ -52,11 +57,11 @@ class AuthProvider extends ChangeNotifier {
     _errorMessage = null;
 
     try {
-      String? token = await getSavedToken();
+      token = await getSavedToken();
       if (token == null) {
         return false;
       }
-      bool isValid = await validateToken(token);
+      bool isValid = await validateToken(token!);
       if (!isValid) {
         clearToken();
         return false;

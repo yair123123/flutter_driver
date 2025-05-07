@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SummaryDispatchesScreen extends StatelessWidget{
+class SummaryDispatchesScreen extends StatelessWidget {
+  const SummaryDispatchesScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+      appBar: AppBar(title: const Text('סיכום סידורים')),
+      body: const Center(child: Text('כאן תופיע רשימת הסידורים')),
+    );
   }
 }

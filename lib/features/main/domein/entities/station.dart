@@ -6,8 +6,10 @@ part 'station.g.dart';
 @freezed
 class Station with _$Station {
   const factory Station({
-    required String id,
-    required String name,
+    required int station_id,
+    required String station_name,
+    required String driver_status,
+    required bool is_dispatcher,
   }) = _Station;
 
   factory Station.fromJson(Map<String, dynamic> json) =>

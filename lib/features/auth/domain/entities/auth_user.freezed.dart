@@ -21,8 +21,8 @@ AuthUser _$AuthUserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AuthUser {
-  String get id => throw _privateConstructorUsedError;
-  String get userName => throw _privateConstructorUsedError;
+  String get driver_id => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
   String get jwt_token => throw _privateConstructorUsedError;
 
   /// Serializes this AuthUser to a JSON map.
@@ -40,7 +40,7 @@ abstract class $AuthUserCopyWith<$Res> {
   factory $AuthUserCopyWith(AuthUser value, $Res Function(AuthUser) then) =
       _$AuthUserCopyWithImpl<$Res, AuthUser>;
   @useResult
-  $Res call({String id, String userName, String jwt_token});
+  $Res call({String driver_id, String username, String jwt_token});
 }
 
 /// @nodoc
@@ -58,21 +58,21 @@ class _$AuthUserCopyWithImpl<$Res, $Val extends AuthUser>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? userName = null,
+    Object? driver_id = null,
+    Object? username = null,
     Object? jwt_token = null,
   }) {
     return _then(
       _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
+            driver_id:
+                null == driver_id
+                    ? _value.driver_id
+                    : driver_id // ignore: cast_nullable_to_non_nullable
                         as String,
-            userName:
-                null == userName
-                    ? _value.userName
-                    : userName // ignore: cast_nullable_to_non_nullable
+            username:
+                null == username
+                    ? _value.username
+                    : username // ignore: cast_nullable_to_non_nullable
                         as String,
             jwt_token:
                 null == jwt_token
@@ -94,7 +94,7 @@ abstract class _$$AuthUserImplCopyWith<$Res>
   ) = __$$AuthUserImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String userName, String jwt_token});
+  $Res call({String driver_id, String username, String jwt_token});
 }
 
 /// @nodoc
@@ -111,21 +111,21 @@ class __$$AuthUserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? userName = null,
+    Object? driver_id = null,
+    Object? username = null,
     Object? jwt_token = null,
   }) {
     return _then(
       _$AuthUserImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
+        driver_id:
+            null == driver_id
+                ? _value.driver_id
+                : driver_id // ignore: cast_nullable_to_non_nullable
                     as String,
-        userName:
-            null == userName
-                ? _value.userName
-                : userName // ignore: cast_nullable_to_non_nullable
+        username:
+            null == username
+                ? _value.username
+                : username // ignore: cast_nullable_to_non_nullable
                     as String,
         jwt_token:
             null == jwt_token
@@ -141,8 +141,8 @@ class __$$AuthUserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AuthUserImpl implements _AuthUser {
   const _$AuthUserImpl({
-    required this.id,
-    required this.userName,
+    required this.driver_id,
+    required this.username,
     required this.jwt_token,
   });
 
@@ -150,15 +150,15 @@ class _$AuthUserImpl implements _AuthUser {
       _$$AuthUserImplFromJson(json);
 
   @override
-  final String id;
+  final String driver_id;
   @override
-  final String userName;
+  final String username;
   @override
   final String jwt_token;
 
   @override
   String toString() {
-    return 'AuthUser(id: $id, userName: $userName, jwt_token: $jwt_token)';
+    return 'AuthUser(driver_id: $driver_id, username: $username, jwt_token: $jwt_token)';
   }
 
   @override
@@ -166,16 +166,17 @@ class _$AuthUserImpl implements _AuthUser {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthUserImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.userName, userName) ||
-                other.userName == userName) &&
+            (identical(other.driver_id, driver_id) ||
+                other.driver_id == driver_id) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
             (identical(other.jwt_token, jwt_token) ||
                 other.jwt_token == jwt_token));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, userName, jwt_token);
+  int get hashCode => Object.hash(runtimeType, driver_id, username, jwt_token);
 
   /// Create a copy of AuthUser
   /// with the given fields replaced by the non-null parameter values.
@@ -193,8 +194,8 @@ class _$AuthUserImpl implements _AuthUser {
 
 abstract class _AuthUser implements AuthUser {
   const factory _AuthUser({
-    required final String id,
-    required final String userName,
+    required final String driver_id,
+    required final String username,
     required final String jwt_token,
   }) = _$AuthUserImpl;
 
@@ -202,9 +203,9 @@ abstract class _AuthUser implements AuthUser {
       _$AuthUserImpl.fromJson;
 
   @override
-  String get id;
+  String get driver_id;
   @override
-  String get userName;
+  String get username;
   @override
   String get jwt_token;
 

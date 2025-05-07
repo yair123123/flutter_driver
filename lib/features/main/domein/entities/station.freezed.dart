@@ -21,8 +21,10 @@ Station _$StationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Station {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  int get station_id => throw _privateConstructorUsedError;
+  String get station_name => throw _privateConstructorUsedError;
+  String get driver_status => throw _privateConstructorUsedError;
+  bool get is_dispatcher => throw _privateConstructorUsedError;
 
   /// Serializes this Station to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +40,12 @@ abstract class $StationCopyWith<$Res> {
   factory $StationCopyWith(Station value, $Res Function(Station) then) =
       _$StationCopyWithImpl<$Res, Station>;
   @useResult
-  $Res call({String id, String name});
+  $Res call({
+    int station_id,
+    String station_name,
+    String driver_status,
+    bool is_dispatcher,
+  });
 }
 
 /// @nodoc
@@ -55,19 +62,34 @@ class _$StationCopyWithImpl<$Res, $Val extends Station>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null, Object? name = null}) {
+  $Res call({
+    Object? station_id = null,
+    Object? station_name = null,
+    Object? driver_status = null,
+    Object? is_dispatcher = null,
+  }) {
     return _then(
       _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
+            station_id:
+                null == station_id
+                    ? _value.station_id
+                    : station_id // ignore: cast_nullable_to_non_nullable
+                        as int,
+            station_name:
+                null == station_name
+                    ? _value.station_name
+                    : station_name // ignore: cast_nullable_to_non_nullable
                         as String,
-            name:
-                null == name
-                    ? _value.name
-                    : name // ignore: cast_nullable_to_non_nullable
+            driver_status:
+                null == driver_status
+                    ? _value.driver_status
+                    : driver_status // ignore: cast_nullable_to_non_nullable
                         as String,
+            is_dispatcher:
+                null == is_dispatcher
+                    ? _value.is_dispatcher
+                    : is_dispatcher // ignore: cast_nullable_to_non_nullable
+                        as bool,
           )
           as $Val,
     );
@@ -82,7 +104,12 @@ abstract class _$$StationImplCopyWith<$Res> implements $StationCopyWith<$Res> {
   ) = __$$StationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name});
+  $Res call({
+    int station_id,
+    String station_name,
+    String driver_status,
+    bool is_dispatcher,
+  });
 }
 
 /// @nodoc
@@ -98,19 +125,34 @@ class __$$StationImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null, Object? name = null}) {
+  $Res call({
+    Object? station_id = null,
+    Object? station_name = null,
+    Object? driver_status = null,
+    Object? is_dispatcher = null,
+  }) {
     return _then(
       _$StationImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
+        station_id:
+            null == station_id
+                ? _value.station_id
+                : station_id // ignore: cast_nullable_to_non_nullable
+                    as int,
+        station_name:
+            null == station_name
+                ? _value.station_name
+                : station_name // ignore: cast_nullable_to_non_nullable
                     as String,
-        name:
-            null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
+        driver_status:
+            null == driver_status
+                ? _value.driver_status
+                : driver_status // ignore: cast_nullable_to_non_nullable
                     as String,
+        is_dispatcher:
+            null == is_dispatcher
+                ? _value.is_dispatcher
+                : is_dispatcher // ignore: cast_nullable_to_non_nullable
+                    as bool,
       ),
     );
   }
@@ -119,19 +161,28 @@ class __$$StationImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$StationImpl implements _Station {
-  const _$StationImpl({required this.id, required this.name});
+  const _$StationImpl({
+    required this.station_id,
+    required this.station_name,
+    required this.driver_status,
+    required this.is_dispatcher,
+  });
 
   factory _$StationImpl.fromJson(Map<String, dynamic> json) =>
       _$$StationImplFromJson(json);
 
   @override
-  final String id;
+  final int station_id;
   @override
-  final String name;
+  final String station_name;
+  @override
+  final String driver_status;
+  @override
+  final bool is_dispatcher;
 
   @override
   String toString() {
-    return 'Station(id: $id, name: $name)';
+    return 'Station(station_id: $station_id, station_name: $station_name, driver_status: $driver_status, is_dispatcher: $is_dispatcher)';
   }
 
   @override
@@ -139,13 +190,25 @@ class _$StationImpl implements _Station {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StationImpl &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.station_id, station_id) ||
+                other.station_id == station_id) &&
+            (identical(other.station_name, station_name) ||
+                other.station_name == station_name) &&
+            (identical(other.driver_status, driver_status) ||
+                other.driver_status == driver_status) &&
+            (identical(other.is_dispatcher, is_dispatcher) ||
+                other.is_dispatcher == is_dispatcher));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(
+    runtimeType,
+    station_id,
+    station_name,
+    driver_status,
+    is_dispatcher,
+  );
 
   /// Create a copy of Station
   /// with the given fields replaced by the non-null parameter values.
@@ -163,16 +226,22 @@ class _$StationImpl implements _Station {
 
 abstract class _Station implements Station {
   const factory _Station({
-    required final String id,
-    required final String name,
+    required final int station_id,
+    required final String station_name,
+    required final String driver_status,
+    required final bool is_dispatcher,
   }) = _$StationImpl;
 
   factory _Station.fromJson(Map<String, dynamic> json) = _$StationImpl.fromJson;
 
   @override
-  String get id;
+  int get station_id;
   @override
-  String get name;
+  String get station_name;
+  @override
+  String get driver_status;
+  @override
+  bool get is_dispatcher;
 
   /// Create a copy of Station
   /// with the given fields replaced by the non-null parameter values.

@@ -18,10 +18,8 @@ class _MainAppScreenState extends State<MainAppScreen> {
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final token =
-          Provider.of<AuthProvider>(context, listen: false).user?.jwt_token;
+      final token = Provider.of<AuthProvider>(context, listen: false).token;
       if (token != null) {
         Provider.of<UserProvider>(context, listen: false).getDetailsUser(token);
       }
@@ -38,30 +36,40 @@ class _MainAppScreenState extends State<MainAppScreen> {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
+
+    if (user == null) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     final List<Widget> _screens = [
-      ListScreen(),
-      MapScreen(),
-      if (user.isDispatcher) SummaryDispatchesScreen(),
+      const ListScreen(),
+      const MapScreen(),
+      if (user.is_dispatcher) const SummaryDispatchesScreen(),
     ];
+
     final navItems = [
       const BottomNavigationBarItem(icon: Icon(Icons.map), label: "מפה"),
       const BottomNavigationBarItem(icon: Icon(Icons.list), label: "רשימה"),
-      if (user.isDispatcher)
+      if (user.is_dispatcher)
         const BottomNavigationBarItem(
           icon: Icon(Icons.local_taxi),
           label: "סדרנות",
         ),
     ];
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("שלום ${userProvider.user.username}"),
+        title: Text("שלום ${user.username}"),
         actions: [
           IconButton(
-            onPressed:
-                () => Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => SettingsScreen()),
-                ),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => const SettingsScreen()),
+              );
+            },
             icon: const Icon(Icons.settings),
           ),
         ],
