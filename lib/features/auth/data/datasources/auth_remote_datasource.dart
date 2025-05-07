@@ -9,21 +9,19 @@ class AuthRemoteDatasource {
   Future<AuthUser> login(String username, String id) async {
     try {
       final response = await http.post(
-      Uri(host:url, port: 5000, path: "api/jwt/create-token"),
+        Uri.http(url, 'api/jwt/create-token'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode({'username': username, 'driverid': id}),
+        body: json.encode({'username': username, 'driver_id': id}),
       );
-
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         final data = json.decode(response.body);
         ResponseAuthUser res = ResponseAuthUser.fromJson(data);
+
         if (res.success) {
-          return res.content;
+          return res.content!;
         }
         return Future.error("שגיאה (${res.error})");
-
-        
-      } else if (response.statusCode == 403) {
+      } else if (response.statusCode == 401) {
         final error = json.decode(response.body);
         return Future.error(error["error"] ?? "משתמש לא מורשה");
       } else {
@@ -36,8 +34,8 @@ class AuthRemoteDatasource {
 
   Future<bool> validateToken(String token) async {
     final response = await http.get(
-      Uri(host: "localhost", port: 5000, path: "api/login/check-token"),
-      headers: {"auth": token},
+      Uri.http(url,"api/jwt/verify"),
+      headers: {'Content-Type': 'application/json',"auth": token},
     );
     if (response.statusCode == 200) {
       return true;

@@ -11,7 +11,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  String? warnningMessage;
   @override
   void initState() {
     super.initState();
@@ -20,6 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _checkLoginStatus() async {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
     bool result = await authProvider.checkLoginWithRetry();
     if (result && mounted) {
       Navigator.pushReplacement(
@@ -54,14 +54,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     final error = Provider.of<AuthProvider>(context).errorMessage;
+    final warning = Provider.of<AuthProvider>(context).warnningMessage;
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (warnningMessage != null)
+            if (warning != null)
               Text(
-                warnningMessage!,
+                warning,
                 style: TextStyle(color: Colors.orangeAccent, fontSize: 16),
               ),
             SizedBox(height: 10),
