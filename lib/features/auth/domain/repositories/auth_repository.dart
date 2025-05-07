@@ -1,7 +1,8 @@
-import 'package:driver_app/features/auth/domain/entities/user.dart';
+import 'package:driver_app/features/auth/domain/entities/auth_user.dart';
 
 abstract class AuthRepository {
-  Future<User> login(String email, String password);
+  Future<AuthUser> login(String email, String password);
   Future<bool> validateSavedToken(String token);
-  Future<String> getSavedToken();
+  Future<String?> getSavedToken();
+  Future<void> clearToken();
 }
