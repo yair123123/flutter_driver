@@ -12,48 +12,91 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("דרייבר 10")),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Consumer<AuthProvider>(
-          builder: (context, provider, child) {
-            if (provider.user != null) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => MainAppScreen()),
-                );
-              });
-            }
-            return Column(
-              children: [
-                TextField(
-                  key: Key("usernameField"),
-                  controller: userNameController,
-                  decoration: InputDecoration(labelText: "Username"),
+      backgroundColor: const Color(0xFFEFF3F6),
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24.0),
+          child: Consumer<AuthProvider>(
+            builder: (context, provider, child) {
+              if (provider.user != null) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (_) => MainAppScreen()),
+                  );
+                });
+              }
+
+              return Card(
+                elevation: 8,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                TextField(
-                  key: Key("idField"),
-                  controller: idController,
-                  decoration: InputDecoration(labelText: "Id"),
-                  obscureText: true,
-                ),
-                SizedBox(height: 10),
-                if (provider.isLoading) CircularProgressIndicator(),
-                ElevatedButton(
-                  key: Key("loginButton"),
-                  onPressed:
-                      () => provider.login(
-                        userNameController.text,
-                        idController.text,
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "התחברות לדרייבר 10",
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                       ),
-                  child: Text("Login"),
+                      const SizedBox(height: 24),
+                      TextField(
+                        key: const Key("usernameField"),
+                        controller: userNameController,
+                        decoration: const InputDecoration(
+                          labelText: "שם משתמש",
+                          prefixIcon: Icon(Icons.person),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        key: const Key("idField"),
+                        controller: idController,
+                        decoration: const InputDecoration(
+                          labelText: "ID",
+                          prefixIcon: Icon(Icons.lock),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      provider.isLoading
+                          ? const CircularProgressIndicator()
+                          : SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton.icon(
+                                key: const Key("loginButton"),
+                                icon: const Icon(Icons.login),
+                                label: const Text("התחבר"),
+                                onPressed: () => provider.login(
+                                  userNameController.text,
+                                  idController.text,
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                ),
+                              ),
+                            ),
+                      if (provider.errorMessage != null) ...[
+                        const SizedBox(height: 16),
+                        Text(
+                          "⚠ ${provider.errorMessage}",
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      ],
+                    ],
+                  ),
                 ),
-                if (provider.errorMessage != null)
-                  Text("שגיאה ${provider.errorMessage}"),
-              ],
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

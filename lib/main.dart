@@ -22,7 +22,8 @@ import 'features/auth/presentation/providers/auth_provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
-  await dotenv.load(fileName: ".env");
+
+await dotenv.load(); 
   runApp(MyApp());
 }
 
