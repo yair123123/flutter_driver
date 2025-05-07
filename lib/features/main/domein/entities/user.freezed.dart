@@ -21,17 +21,13 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  String get id => throw _privateConstructorUsedError;
+  String get driver_id => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
-  String get jwt => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
-  List<RelationStation> get relationsStation =>
-      throw _privateConstructorUsedError;
-  double get rate => throw _privateConstructorUsedError;
-  int get sumRides => throw _privateConstructorUsedError;
-  bool get isDispatcher => throw _privateConstructorUsedError;
-  Station get stationDispatch => throw _privateConstructorUsedError;
-  bool get status => throw _privateConstructorUsedError;
+  double get rating => throw _privateConstructorUsedError;
+  int get monthly_rides_sum => throw _privateConstructorUsedError;
+  bool get is_dispatcher => throw _privateConstructorUsedError;
+  List<Station> get stations => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,19 +44,14 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call({
-    String id,
+    String driver_id,
     String username,
-    String jwt,
     String gender,
-    List<RelationStation> relationsStation,
-    double rate,
-    int sumRides,
-    bool isDispatcher,
-    Station stationDispatch,
-    bool status,
+    double rating,
+    int monthly_rides_sum,
+    bool is_dispatcher,
+    List<Station> stations,
   });
-
-  $StationCopyWith<$Res> get stationDispatch;
 }
 
 /// @nodoc
@@ -78,82 +69,54 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? driver_id = null,
     Object? username = null,
-    Object? jwt = null,
     Object? gender = null,
-    Object? relationsStation = null,
-    Object? rate = null,
-    Object? sumRides = null,
-    Object? isDispatcher = null,
-    Object? stationDispatch = null,
-    Object? status = null,
+    Object? rating = null,
+    Object? monthly_rides_sum = null,
+    Object? is_dispatcher = null,
+    Object? stations = null,
   }) {
     return _then(
       _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
+            driver_id:
+                null == driver_id
+                    ? _value.driver_id
+                    : driver_id // ignore: cast_nullable_to_non_nullable
                         as String,
             username:
                 null == username
                     ? _value.username
                     : username // ignore: cast_nullable_to_non_nullable
                         as String,
-            jwt:
-                null == jwt
-                    ? _value.jwt
-                    : jwt // ignore: cast_nullable_to_non_nullable
-                        as String,
             gender:
                 null == gender
                     ? _value.gender
                     : gender // ignore: cast_nullable_to_non_nullable
                         as String,
-            relationsStation:
-                null == relationsStation
-                    ? _value.relationsStation
-                    : relationsStation // ignore: cast_nullable_to_non_nullable
-                        as List<RelationStation>,
-            rate:
-                null == rate
-                    ? _value.rate
-                    : rate // ignore: cast_nullable_to_non_nullable
+            rating:
+                null == rating
+                    ? _value.rating
+                    : rating // ignore: cast_nullable_to_non_nullable
                         as double,
-            sumRides:
-                null == sumRides
-                    ? _value.sumRides
-                    : sumRides // ignore: cast_nullable_to_non_nullable
+            monthly_rides_sum:
+                null == monthly_rides_sum
+                    ? _value.monthly_rides_sum
+                    : monthly_rides_sum // ignore: cast_nullable_to_non_nullable
                         as int,
-            isDispatcher:
-                null == isDispatcher
-                    ? _value.isDispatcher
-                    : isDispatcher // ignore: cast_nullable_to_non_nullable
+            is_dispatcher:
+                null == is_dispatcher
+                    ? _value.is_dispatcher
+                    : is_dispatcher // ignore: cast_nullable_to_non_nullable
                         as bool,
-            stationDispatch:
-                null == stationDispatch
-                    ? _value.stationDispatch
-                    : stationDispatch // ignore: cast_nullable_to_non_nullable
-                        as Station,
-            status:
-                null == status
-                    ? _value.status
-                    : status // ignore: cast_nullable_to_non_nullable
-                        as bool,
+            stations:
+                null == stations
+                    ? _value.stations
+                    : stations // ignore: cast_nullable_to_non_nullable
+                        as List<Station>,
           )
           as $Val,
     );
-  }
-
-  /// Create a copy of User
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $StationCopyWith<$Res> get stationDispatch {
-    return $StationCopyWith<$Res>(_value.stationDispatch, (value) {
-      return _then(_value.copyWith(stationDispatch: value) as $Val);
-    });
   }
 }
 
@@ -166,20 +129,14 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call({
-    String id,
+    String driver_id,
     String username,
-    String jwt,
     String gender,
-    List<RelationStation> relationsStation,
-    double rate,
-    int sumRides,
-    bool isDispatcher,
-    Station stationDispatch,
-    bool status,
+    double rating,
+    int monthly_rides_sum,
+    bool is_dispatcher,
+    List<Station> stations,
   });
-
-  @override
-  $StationCopyWith<$Res> get stationDispatch;
 }
 
 /// @nodoc
@@ -194,69 +151,51 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? driver_id = null,
     Object? username = null,
-    Object? jwt = null,
     Object? gender = null,
-    Object? relationsStation = null,
-    Object? rate = null,
-    Object? sumRides = null,
-    Object? isDispatcher = null,
-    Object? stationDispatch = null,
-    Object? status = null,
+    Object? rating = null,
+    Object? monthly_rides_sum = null,
+    Object? is_dispatcher = null,
+    Object? stations = null,
   }) {
     return _then(
       _$UserImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
+        driver_id:
+            null == driver_id
+                ? _value.driver_id
+                : driver_id // ignore: cast_nullable_to_non_nullable
                     as String,
         username:
             null == username
                 ? _value.username
                 : username // ignore: cast_nullable_to_non_nullable
                     as String,
-        jwt:
-            null == jwt
-                ? _value.jwt
-                : jwt // ignore: cast_nullable_to_non_nullable
-                    as String,
         gender:
             null == gender
                 ? _value.gender
                 : gender // ignore: cast_nullable_to_non_nullable
                     as String,
-        relationsStation:
-            null == relationsStation
-                ? _value._relationsStation
-                : relationsStation // ignore: cast_nullable_to_non_nullable
-                    as List<RelationStation>,
-        rate:
-            null == rate
-                ? _value.rate
-                : rate // ignore: cast_nullable_to_non_nullable
+        rating:
+            null == rating
+                ? _value.rating
+                : rating // ignore: cast_nullable_to_non_nullable
                     as double,
-        sumRides:
-            null == sumRides
-                ? _value.sumRides
-                : sumRides // ignore: cast_nullable_to_non_nullable
+        monthly_rides_sum:
+            null == monthly_rides_sum
+                ? _value.monthly_rides_sum
+                : monthly_rides_sum // ignore: cast_nullable_to_non_nullable
                     as int,
-        isDispatcher:
-            null == isDispatcher
-                ? _value.isDispatcher
-                : isDispatcher // ignore: cast_nullable_to_non_nullable
+        is_dispatcher:
+            null == is_dispatcher
+                ? _value.is_dispatcher
+                : is_dispatcher // ignore: cast_nullable_to_non_nullable
                     as bool,
-        stationDispatch:
-            null == stationDispatch
-                ? _value.stationDispatch
-                : stationDispatch // ignore: cast_nullable_to_non_nullable
-                    as Station,
-        status:
-            null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                    as bool,
+        stations:
+            null == stations
+                ? _value._stations
+                : stations // ignore: cast_nullable_to_non_nullable
+                    as List<Station>,
       ),
     );
   }
@@ -266,52 +205,41 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   const _$UserImpl({
-    required this.id,
+    required this.driver_id,
     required this.username,
-    required this.jwt,
     required this.gender,
-    required final List<RelationStation> relationsStation,
-    required this.rate,
-    required this.sumRides,
-    required this.isDispatcher,
-    required this.stationDispatch,
-    required this.status,
-  }) : _relationsStation = relationsStation;
+    required this.rating,
+    required this.monthly_rides_sum,
+    required this.is_dispatcher,
+    required final List<Station> stations,
+  }) : _stations = stations;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
   @override
-  final String id;
+  final String driver_id;
   @override
   final String username;
   @override
-  final String jwt;
-  @override
   final String gender;
-  final List<RelationStation> _relationsStation;
   @override
-  List<RelationStation> get relationsStation {
-    if (_relationsStation is EqualUnmodifiableListView)
-      return _relationsStation;
+  final double rating;
+  @override
+  final int monthly_rides_sum;
+  @override
+  final bool is_dispatcher;
+  final List<Station> _stations;
+  @override
+  List<Station> get stations {
+    if (_stations is EqualUnmodifiableListView) return _stations;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_relationsStation);
+    return EqualUnmodifiableListView(_stations);
   }
 
   @override
-  final double rate;
-  @override
-  final int sumRides;
-  @override
-  final bool isDispatcher;
-  @override
-  final Station stationDispatch;
-  @override
-  final bool status;
-
-  @override
   String toString() {
-    return 'User(id: $id, username: $username, jwt: $jwt, gender: $gender, relationsStation: $relationsStation, rate: $rate, sumRides: $sumRides, isDispatcher: $isDispatcher, stationDispatch: $stationDispatch, status: $status)';
+    return 'User(driver_id: $driver_id, username: $username, gender: $gender, rating: $rating, monthly_rides_sum: $monthly_rides_sum, is_dispatcher: $is_dispatcher, stations: $stations)';
   }
 
   @override
@@ -319,39 +247,30 @@ class _$UserImpl implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
-            (identical(other.id, id) || other.id == id) &&
+            (identical(other.driver_id, driver_id) ||
+                other.driver_id == driver_id) &&
             (identical(other.username, username) ||
                 other.username == username) &&
-            (identical(other.jwt, jwt) || other.jwt == jwt) &&
             (identical(other.gender, gender) || other.gender == gender) &&
-            const DeepCollectionEquality().equals(
-              other._relationsStation,
-              _relationsStation,
-            ) &&
-            (identical(other.rate, rate) || other.rate == rate) &&
-            (identical(other.sumRides, sumRides) ||
-                other.sumRides == sumRides) &&
-            (identical(other.isDispatcher, isDispatcher) ||
-                other.isDispatcher == isDispatcher) &&
-            (identical(other.stationDispatch, stationDispatch) ||
-                other.stationDispatch == stationDispatch) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.monthly_rides_sum, monthly_rides_sum) ||
+                other.monthly_rides_sum == monthly_rides_sum) &&
+            (identical(other.is_dispatcher, is_dispatcher) ||
+                other.is_dispatcher == is_dispatcher) &&
+            const DeepCollectionEquality().equals(other._stations, _stations));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    id,
+    driver_id,
     username,
-    jwt,
     gender,
-    const DeepCollectionEquality().hash(_relationsStation),
-    rate,
-    sumRides,
-    isDispatcher,
-    stationDispatch,
-    status,
+    rating,
+    monthly_rides_sum,
+    is_dispatcher,
+    const DeepCollectionEquality().hash(_stations),
   );
 
   /// Create a copy of User
@@ -370,40 +289,31 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User({
-    required final String id,
+    required final String driver_id,
     required final String username,
-    required final String jwt,
     required final String gender,
-    required final List<RelationStation> relationsStation,
-    required final double rate,
-    required final int sumRides,
-    required final bool isDispatcher,
-    required final Station stationDispatch,
-    required final bool status,
+    required final double rating,
+    required final int monthly_rides_sum,
+    required final bool is_dispatcher,
+    required final List<Station> stations,
   }) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  String get id;
+  String get driver_id;
   @override
   String get username;
   @override
-  String get jwt;
-  @override
   String get gender;
   @override
-  List<RelationStation> get relationsStation;
+  double get rating;
   @override
-  double get rate;
+  int get monthly_rides_sum;
   @override
-  int get sumRides;
+  bool get is_dispatcher;
   @override
-  bool get isDispatcher;
-  @override
-  Station get stationDispatch;
-  @override
-  bool get status;
+  List<Station> get stations;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
