@@ -4,7 +4,7 @@ class GetSavedToken {
   final AuthRepository authRepository;
   GetSavedToken(this.authRepository);
 
-  Future<String> call() async{
+  Future<String?> call() async{
     return await authRepository.getSavedToken();
   }
 

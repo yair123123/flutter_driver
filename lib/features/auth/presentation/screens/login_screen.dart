@@ -1,5 +1,5 @@
-import 'package:driver_app/core/main_app_screen.dart';
 import 'package:driver_app/features/auth/presentation/providers/auth_provider.dart';
+import 'package:driver_app/features/main/presentation/screens/main_app_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,41 +12,47 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("my-app")),
+      appBar: AppBar(title: Text("דרייבר 10")),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Consumer<AuthProvider>(
           builder: (context, provider, child) {
-            if(provider.user != null){
-              WidgetsBinding.instance.addPostFrameCallback((_){
+            if (provider.user != null) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushReplacement(
                   context,
-                   MaterialPageRoute(builder: (_) => MainAppScreen())
-                   );
+                  MaterialPageRoute(builder: (_) => MainAppScreen()),
+                );
               });
             }
             return Column(
               children: [
                 TextField(
-                  controller:userNameController,
-                  decoration : InputDecoration(labelText: "Username")
+                  key: Key("usernameField"),
+                  controller: userNameController,
+                  decoration: InputDecoration(labelText: "Username"),
                 ),
                 TextField(
-                  controller:idController,
-                  decoration : InputDecoration(labelText: "Id"),
+                  key: Key("idField"),
+                  controller: idController,
+                  decoration: InputDecoration(labelText: "Id"),
                   obscureText: true,
                 ),
-                SizedBox(height: 10,),
-                if (provider.is_loading) CircularProgressIndicator(),
-                ElevatedButton(onPressed:() => provider.login(
-                  userNameController.text,
-                  idController.text
-                ),            
-                  child: Text("Login"),),
-                if (provider.user != null)
-                Text("You are logged in as ${provider.user!.userName}")
-              ]
-              );
+                SizedBox(height: 10),
+                if (provider.isLoading) CircularProgressIndicator(),
+                ElevatedButton(
+                  key: Key("loginButton"),
+                  onPressed:
+                      () => provider.login(
+                        userNameController.text,
+                        idController.text,
+                      ),
+                  child: Text("Login"),
+                ),
+                if (provider.errorMessage != null)
+                  Text("שגיאה ${provider.errorMessage}"),
+              ],
+            );
           },
         ),
       ),
