@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:driver_app/features/auth/domain/entities/auth_user.dart';
+import 'package:driver_app/features/auth/domain/entities/login_check_result.dart';
 import 'package:driver_app/features/auth/domain/usecases/clear_token.dart';
 import 'package:driver_app/features/auth/domain/usecases/get_saved_token.dart';
 import 'package:driver_app/features/auth/domain/usecases/login.dart';
@@ -21,7 +22,7 @@ class AuthProvider extends ChangeNotifier {
     this.validateToken,
     this.clearToken,
   );
-  late String? token; 
+  late String? token;
   AuthUser? get user => _user;
   bool get isLoading => _isLoading;
   String? _errorMessage;
@@ -53,39 +54,37 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> checkToken() async {
+  Future<bool> checkToken(String token) async {
     _errorMessage = null;
 
-    try {
-      token = await getSavedToken();
-      if (token == null) {
-        return false;
-      }
-      bool isValid = await validateToken(token!);
-      if (!isValid) {
-        clearToken();
-        return false;
-      }
+    bool isValid = await validateToken(token);
+    if (isValid) {
       return true;
-    } catch (e) {
-      _errorMessage = e.toString();
-      notifyListeners();
-      return false;
     }
+    await clearToken();
+    return false;
   }
 
-  Future<bool> checkLoginWithRetry() async {
+  Future<LoginCheckResult> checkLoginWithRetry() async {
+    token = await getSavedToken();
+    if (token == null) {
+      return LoginCheckResult.noToken;
+    }
+
     int attempts = 0;
     const int maxAttempts = 3;
     while (attempts < maxAttempts) {
-      bool isLoggedIn = await checkToken();
-      if (isLoggedIn == true) {
-        return true;
+      try {
+        bool isValid = await checkToken(token!);
+        if (isValid) return LoginCheckResult.success;
+        return LoginCheckResult.noToken;
+      } catch (e) {
+        attempts++;
+        await Future.delayed(Duration(seconds: 5));
+        setWarnningMessage("התקשורת איטית, מנסה להתחבר שוב...");
       }
-      attempts++;
-      await Future.delayed(Duration(seconds: 5));
-      setWarnningMessage("התקשורת איטית החיבור מתעכב");
     }
-    return false;
+
+    return LoginCheckResult.serverError;
   }
 }

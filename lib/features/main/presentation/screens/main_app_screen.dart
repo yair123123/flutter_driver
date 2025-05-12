@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MainAppScreen extends StatefulWidget {
+  const MainAppScreen({super.key});
+
   @override
   _MainAppScreenState createState() => _MainAppScreenState();
 }
@@ -43,10 +45,11 @@ class _MainAppScreenState extends State<MainAppScreen> {
       );
     }
 
-    final List<Widget> _screens = [
+    final List<Widget> screens = [
       const ListScreen(),
       const MapScreen(),
       if (user.is_dispatcher) const SummaryDispatchesScreen(),
+      const SettingsScreen(),
     ];
 
     final navItems = [
@@ -57,28 +60,20 @@ class _MainAppScreenState extends State<MainAppScreen> {
           icon: Icon(Icons.local_taxi),
           label: "סדרנות",
         ),
+      const BottomNavigationBarItem(icon: Icon(Icons.settings), label: "הגדרות"),
     ];
 
     return Scaffold(
       appBar: AppBar(
         title: Text("שלום ${user.username}"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (_) => const SettingsScreen()),
-              );
-            },
-            icon: const Icon(Icons.settings),
-          ),
-        ],
       ),
-      body: _screens[_selectedIndex],
+      body: screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         items: navItems,
         onTap: _onTapp,
+          type: BottomNavigationBarType.fixed,
+
       ),
     );
   }

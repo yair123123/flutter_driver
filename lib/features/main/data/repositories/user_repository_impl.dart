@@ -6,6 +6,7 @@ class UserRepositoryImpl implements UserRepository{
   UserDataSource dataSource;
 
   UserRepositoryImpl( this.dataSource);
+  @override
   Future<User> getUser(String token) async {
     return await dataSource.getUser(token);
   }
