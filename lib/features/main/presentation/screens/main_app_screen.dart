@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MainAppScreen extends StatefulWidget {
+  const MainAppScreen({super.key});
+
   @override
   _MainAppScreenState createState() => _MainAppScreenState();
 }
@@ -43,7 +45,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
       );
     }
 
-    final List<Widget> _screens = [
+    final List<Widget> screens = [
       const ListScreen(),
       const MapScreen(),
       if (user.is_dispatcher) const SummaryDispatchesScreen(),
@@ -65,7 +67,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
       appBar: AppBar(
         title: Text("שלום ${user.username}"),
       ),
-      body: _screens[_selectedIndex],
+      body: screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         items: navItems,

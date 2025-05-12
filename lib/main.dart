@@ -1,3 +1,4 @@
+import 'package:driver_app/core/env/env.dart';
 import 'package:driver_app/core/settings/data/data_source/settings_local_data_source.dart';
 import 'package:driver_app/core/settings/data/settings_repository_impl.dart';
 import 'package:driver_app/core/settings/domain/use_cases/get_settings.dart';
@@ -24,6 +25,7 @@ import 'features/auth/presentation/providers/auth_provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
+  Env.init();
   await dotenv.load();
   runApp(MyApp());
 }
@@ -33,18 +35,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final apiLoginUrl = Env.authUrl;
     final authLocalDatasource =
         kIsWeb
             ? AuthLocalDatasourceWeb()
             : AuthLocalDatasourceMobile(const FlutterSecureStorage());
-    final authRemoteDatasource = AuthRemoteDatasource(
-      dotenv.get("API_LOGIN_URL"),
-    );
+    final authRemoteDatasource = AuthRemoteDatasource(apiLoginUrl);
     final authRepository = AuthRepositoryImpl(
       authRemoteDatasource,
       authLocalDatasource,
     );
-    final userDataSource = UserDataSource(dotenv.get("API_LOGIN_URL"));
+    final userDataSource = UserDataSource(apiLoginUrl);
 
     final userRepository = UserRepositoryImpl(userDataSource);
     final settingsRepository = SettingsRepositoryImpl(
