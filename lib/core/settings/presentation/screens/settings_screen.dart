@@ -7,8 +7,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("הגדרות")),
+    return Scaffold(      
       body: Consumer<SettingsProvider>(
         builder: (context, Provider, child) {
           return ListView(

@@ -1,4 +1,4 @@
-import 'package:driver_app/features/auth/data/datasources/auth_local_datasouce.dart';
+import 'package:driver_app/features/auth/data/datasources/auth_class_datasource.dart';
 import 'package:driver_app/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:driver_app/features/auth/domain/entities/auth_user.dart';
 import 'package:driver_app/features/auth/domain/repositories/auth_repository.dart';

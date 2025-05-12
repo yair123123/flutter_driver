@@ -48,6 +48,8 @@ dev_dependencies:
   build_runner: ^2.4.6
   freezed: ^2.4.1
   json_serializable: ^6.7.1
+  dhttpd: ^4.0.0
+
   flutter_test:
     sdk: flutter
 
@@ -69,7 +71,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/.env
+    - .env
 
   # To add assets to your application, add an assets section, like this:
   # assets:

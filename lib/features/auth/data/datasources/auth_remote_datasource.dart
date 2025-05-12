@@ -21,7 +21,7 @@ class AuthRemoteDatasource {
           return res.content!;
         }
         return Future.error("שגיאה (${res.error})");
-      } else if (response.statusCode == 401) {
+      } else if (response.statusCode == 400) {
         final error = json.decode(response.body);
         return Future.error(error["error"] ?? "משתמש לא מורשה");
       } else {
