@@ -1,5 +1,5 @@
 @JS('window.env')
-library env;
+library;
 
 import 'package:js/js.dart';
 
