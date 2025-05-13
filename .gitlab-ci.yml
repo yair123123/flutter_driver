@@ -3,7 +3,7 @@ stages:
   - deploy
 
 variables:
-  APP_IMAGE: "registry.gitlab.com/your-group/your-project/driver-app"
+  APP_IMAGE: "registry.gitlab.com/driver_app1/driver-app"
   OPENSHIFT_PROJECT: "yizeshe-dev"
 
 # שלב בנייה + פוש
