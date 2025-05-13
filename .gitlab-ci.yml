@@ -26,7 +26,7 @@ build_and_push:
 
 deploy_openshift:
   stage: deploy
-  image: bitnami/kubectl:latest
+  image: quay.io/openshift/origin-cli:latest
   script:
     - echo "$OPENSHIFT_TOKEN" | oc login --token=$(cat -) --server=$OPENSHIFT_SERVER --insecure-skip-tls-verify
     - oc project $OPENSHIFT_PROJECT
