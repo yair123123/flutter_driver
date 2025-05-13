@@ -1,12 +1,15 @@
 stages:
   - build
   - deploy
-
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_COMMIT_BRANCH == "dev"'
 variables:
   APP_IMAGE: "registry.gitlab.com/driver_app1/driver-app"
   OPENSHIFT_PROJECT: "yizeshe-dev"
 
-# שלב בנייה + פוש
 build_and_push:
   stage: build
   image: docker:latest
@@ -21,7 +24,6 @@ build_and_push:
     paths:
       - build/web
 
-# שלב דיפלוי ל־OpenShift
 deploy_openshift:
   stage: deploy
   image: bitnami/kubectl:latest
@@ -30,7 +32,4 @@ deploy_openshift:
     - oc project $OPENSHIFT_PROJECT
     - oc set image deployment/flutter-deployment flutter=$APP_IMAGE:$CI_COMMIT_SHORT_SHA --record
     - oc rollout status deployment/flutter-deployment
-  only:
-    - dev
-    - main
-    - merge_requests
+
