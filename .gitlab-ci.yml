@@ -8,7 +8,7 @@ workflow:
     - if: '$CI_COMMIT_BRANCH == "dev"'
 variables:
   APP_IMAGE: "registry.gitlab.com/driver_app1/driver-app"
-  OPENSHIFT_PROJECT: "yizeshe-dev"
+  OPENSHIFT_PROJECT: "yizwshe-dev"
 
 build_and_push:
   stage: build
