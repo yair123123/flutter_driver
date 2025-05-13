@@ -21,7 +21,6 @@ build_and_push:
     paths:
       - build/web
 
-# שלב דיפלוי ל־OpenShift
 deploy_openshift:
   stage: deploy
   image: bitnami/kubectl:latest
