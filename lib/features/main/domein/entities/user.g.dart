@@ -7,7 +7,8 @@ part of 'user.dart';
 // **************************************************************************
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
-  driver_id: json['driver_id'] as String,
+  id: json['id'] as String,
+  driver_key: json['driver_key'] as String,
   username: json['username'] as String,
   gender: json['gender'] as String,
   rating: (json['rating'] as num).toDouble(),
@@ -21,7 +22,8 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{
-      'driver_id': instance.driver_id,
+      'id': instance.id,
+      'driver_key': instance.driver_key,
       'username': instance.username,
       'gender': instance.gender,
       'rating': instance.rating,

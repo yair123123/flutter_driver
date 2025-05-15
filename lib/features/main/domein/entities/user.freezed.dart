@@ -21,7 +21,8 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  String get driver_id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get driver_key => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
   double get rating => throw _privateConstructorUsedError;
@@ -44,7 +45,8 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call({
-    String driver_id,
+    String id,
+    String driver_key,
     String username,
     String gender,
     double rating,
@@ -69,7 +71,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? driver_id = null,
+    Object? id = null,
+    Object? driver_key = null,
     Object? username = null,
     Object? gender = null,
     Object? rating = null,
@@ -79,10 +82,15 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   }) {
     return _then(
       _value.copyWith(
-            driver_id:
-                null == driver_id
-                    ? _value.driver_id
-                    : driver_id // ignore: cast_nullable_to_non_nullable
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String,
+            driver_key:
+                null == driver_key
+                    ? _value.driver_key
+                    : driver_key // ignore: cast_nullable_to_non_nullable
                         as String,
             username:
                 null == username
@@ -129,7 +137,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call({
-    String driver_id,
+    String id,
+    String driver_key,
     String username,
     String gender,
     double rating,
@@ -151,7 +160,8 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? driver_id = null,
+    Object? id = null,
+    Object? driver_key = null,
     Object? username = null,
     Object? gender = null,
     Object? rating = null,
@@ -161,10 +171,15 @@ class __$$UserImplCopyWithImpl<$Res>
   }) {
     return _then(
       _$UserImpl(
-        driver_id:
-            null == driver_id
-                ? _value.driver_id
-                : driver_id // ignore: cast_nullable_to_non_nullable
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String,
+        driver_key:
+            null == driver_key
+                ? _value.driver_key
+                : driver_key // ignore: cast_nullable_to_non_nullable
                     as String,
         username:
             null == username
@@ -205,7 +220,8 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   const _$UserImpl({
-    required this.driver_id,
+    required this.id,
+    required this.driver_key,
     required this.username,
     required this.gender,
     required this.rating,
@@ -218,7 +234,9 @@ class _$UserImpl implements _User {
       _$$UserImplFromJson(json);
 
   @override
-  final String driver_id;
+  final String id;
+  @override
+  final String driver_key;
   @override
   final String username;
   @override
@@ -239,7 +257,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(driver_id: $driver_id, username: $username, gender: $gender, rating: $rating, monthly_rides_sum: $monthly_rides_sum, is_dispatcher: $is_dispatcher, stations: $stations)';
+    return 'User(id: $id, driver_key: $driver_key, username: $username, gender: $gender, rating: $rating, monthly_rides_sum: $monthly_rides_sum, is_dispatcher: $is_dispatcher, stations: $stations)';
   }
 
   @override
@@ -247,8 +265,9 @@ class _$UserImpl implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
-            (identical(other.driver_id, driver_id) ||
-                other.driver_id == driver_id) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.driver_key, driver_key) ||
+                other.driver_key == driver_key) &&
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.gender, gender) || other.gender == gender) &&
@@ -264,7 +283,8 @@ class _$UserImpl implements _User {
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    driver_id,
+    id,
+    driver_key,
     username,
     gender,
     rating,
@@ -289,7 +309,8 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User({
-    required final String driver_id,
+    required final String id,
+    required final String driver_key,
     required final String username,
     required final String gender,
     required final double rating,
@@ -301,7 +322,9 @@ abstract class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  String get driver_id;
+  String get id;
+  @override
+  String get driver_key;
   @override
   String get username;
   @override
