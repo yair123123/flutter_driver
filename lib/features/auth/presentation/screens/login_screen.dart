@@ -1,6 +1,7 @@
 import 'package:driver_app/features/auth/presentation/providers/auth_provider.dart';
 import 'package:driver_app/features/main/presentation/screens/main_app_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -57,6 +58,11 @@ class LoginScreen extends StatelessWidget {
                       TextField(
                         key: const Key("idField"),
                         controller: idController,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly, 
+                          LengthLimitingTextInputFormatter(10),   
+                        ],
                         decoration: const InputDecoration(
                           labelText: "ID",
                           prefixIcon: Icon(Icons.lock),
