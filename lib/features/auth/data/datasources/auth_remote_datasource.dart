@@ -12,7 +12,7 @@ class AuthRemoteDatasource {
       final response = await http.post(
         Uri.http(url, 'api/jwt/create-token'),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode({'username': username, 'driver_id': id}),
+        body: json.encode({'username': username, 'driver_key': id}),
       );
       return loginResponseHandler(response);
     } catch (e) {
