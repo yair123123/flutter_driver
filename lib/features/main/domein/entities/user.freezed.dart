@@ -21,7 +21,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get driver_key => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call({
-    String id,
+    int id,
     String driver_key,
     String username,
     String gender,
@@ -86,7 +86,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
                 null == id
                     ? _value.id
                     : id // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             driver_key:
                 null == driver_key
                     ? _value.driver_key
@@ -137,7 +137,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call({
-    String id,
+    int id,
     String driver_key,
     String username,
     String gender,
@@ -175,7 +175,7 @@ class __$$UserImplCopyWithImpl<$Res>
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         driver_key:
             null == driver_key
                 ? _value.driver_key
@@ -234,7 +234,7 @@ class _$UserImpl implements _User {
       _$$UserImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String driver_key;
   @override
@@ -309,7 +309,7 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User({
-    required final String id,
+    required final int id,
     required final String driver_key,
     required final String username,
     required final String gender,
@@ -322,7 +322,7 @@ abstract class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get driver_key;
   @override
