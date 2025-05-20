@@ -5,6 +5,8 @@ import 'package:driver_app/core/settings/domain/use_cases/get_settings.dart';
 import 'package:driver_app/core/settings/domain/use_cases/set_settings.dart';
 import 'package:driver_app/core/settings/presentation/providers/settings_provider.dart';
 import 'package:driver_app/features/auth/data/datasources/auth_local_datasource_mobile.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:driver_app/features/auth/data/datasources/auth_local_datasource_web.dart';
 import 'package:driver_app/features/auth/domain/usecases/clear_token.dart';
 import 'package:driver_app/features/auth/domain/usecases/get_saved_token.dart';
@@ -25,12 +27,15 @@ import 'features/auth/presentation/providers/auth_provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
+    if (!kIsWeb) {
+    await dotenv.load();
+  }
   Env.init();
-  await dotenv.load();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  
   const MyApp({super.key});
 
   @override
@@ -77,6 +82,17 @@ class MyApp extends StatelessWidget {
       child: Consumer<SettingsProvider>(
         builder: (context, settingsProvider, chiled) {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
+                  locale: const Locale('he'), 
+      supportedLocales: const [
+        Locale('he'),
+        Locale('en'), 
+      ],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
             title: "Driver App",
             home: SplashScreen(),
             theme: ThemeData(
