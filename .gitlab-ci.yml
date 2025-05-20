@@ -23,7 +23,8 @@ build_and_push:
     name: "web-artifacts"
     paths:
       - build/web
-
+  only:
+    - dev
 deploy_openshift:
   stage: deploy
   image: quay.io/openshift/origin-cli:latest
@@ -32,4 +33,6 @@ deploy_openshift:
     - oc project $OPENSHIFT_PROJECT
     - oc set image deployment/flutter-deployment flutter=$APP_IMAGE:$CI_COMMIT_SHORT_SHA --record
     - oc rollout status deployment/flutter-deployment
+  only:
+    - dev
 
