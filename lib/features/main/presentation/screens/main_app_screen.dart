@@ -2,8 +2,8 @@ import 'package:driver_app/core/settings/presentation/screens/settings_screen.da
 import 'package:driver_app/features/auth/presentation/providers/auth_provider.dart';
 import 'package:driver_app/features/dispatcher/presentation/screens/summary_dispatches_screen.dart';
 import 'package:driver_app/features/main/presentation/providers/user_provider.dart';
-import 'package:driver_app/features/rides/presentation/screens/list_screen.dart';
-import 'package:driver_app/features/rides/presentation/screens/map_screen.dart';
+import 'package:driver_app/features/rides/presentation/screens/rides_screens.dart';
+import 'package:driver_app/widgets/driver_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
     });
   }
 
-  void _onTapp(int index) {
+  void _onTap(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -40,40 +40,40 @@ class _MainAppScreenState extends State<MainAppScreen> {
     final user = userProvider.user;
 
     if (user == null) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     final List<Widget> screens = [
-      const ListScreen(),
-      const MapScreen(),
+      const RidesScreens(),
       if (user.is_dispatcher) const SummaryDispatchesScreen(),
       const SettingsScreen(),
     ];
 
     final navItems = [
-      const BottomNavigationBarItem(icon: Icon(Icons.map), label: "מפה"),
-      const BottomNavigationBarItem(icon: Icon(Icons.list), label: "רשימה"),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.local_taxi),
+        label: "נסיעות",
+      ),
       if (user.is_dispatcher)
         const BottomNavigationBarItem(
-          icon: Icon(Icons.local_taxi),
+          icon: Icon(Icons.manage_accounts),
           label: "סדרנות",
         ),
-      const BottomNavigationBarItem(icon: Icon(Icons.settings), label: "הגדרות"),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.settings),
+        label: "הגדרות",
+      ),
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("שלום ${user.username}"),
-      ),
+      appBar: DriverAppBar(user: context.watch<UserProvider>().user!),
+
       body: screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         items: navItems,
-        onTap: _onTapp,
-          type: BottomNavigationBarType.fixed,
-
+        onTap: _onTap,
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }
