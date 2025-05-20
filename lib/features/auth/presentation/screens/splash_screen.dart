@@ -22,6 +22,9 @@ class _SplashScreenState extends State<SplashScreen> {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     LoginCheckResult result = await authProvider.checkLoginWithRetry();
+    if(!mounted){
+      return;
+    }
     switch (result) {
       case LoginCheckResult.serverError:
         showDialog(
