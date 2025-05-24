@@ -9,16 +9,15 @@ class StationChatScreen extends StatelessWidget {
   Widget build(context){
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(station.station_name),
+      appBar: AppBar(
+        title: Text(station.station_name),
         
-      // ),
+      )
       // body: ListView.builder(
       //   itemCount: rides.length,
       //   itemBuilder: (context,index) => {
+      // }
+      );
 
-      // }),
-
-    );
   }
 }

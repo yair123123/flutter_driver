@@ -18,10 +18,10 @@ class _RidesScreens extends State<RidesScreens> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> screens = [const MapScreen(), const StationListScreen()];
+    final List<Widget> screens = [const StationListScreen(),const MapScreen()];
     final List<BottomNavigationBarItem> navItems = [
-      const BottomNavigationBarItem(icon: Icon(Icons.map), label: "מפה"),
       const BottomNavigationBarItem(icon: Icon(Icons.list), label: "רשימה"),
+      const BottomNavigationBarItem(icon: Icon(Icons.map), label: "מפה"),
     ];
     return Scaffold(
       body: screens[_selectedIndex],
@@ -29,7 +29,7 @@ class _RidesScreens extends State<RidesScreens> {
         currentIndex: _selectedIndex,
         onTap: _onTap,
         type: BottomNavigationBarType.fixed,
-        iconSize: 20.0, // אייקון קטן יותר
+        iconSize: 20.0, 
         selectedFontSize: 10.0,
         unselectedFontSize: 10.0,
         showSelectedLabels: false,

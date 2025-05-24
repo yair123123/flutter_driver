@@ -1,5 +1,6 @@
 import 'package:driver_app/core/settings/presentation/screens/settings_screen.dart';
 import 'package:driver_app/features/auth/presentation/providers/auth_provider.dart';
+import 'package:driver_app/features/chat/presentation/screens/list_chats_screen.dart';
 import 'package:driver_app/features/dispatcher/presentation/screens/summary_dispatches_screen.dart';
 import 'package:driver_app/features/main/presentation/providers/user_provider.dart';
 import 'package:driver_app/features/rides/presentation/screens/rides_screens.dart';
@@ -46,6 +47,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
     final List<Widget> screens = [
       const RidesScreens(),
       if (user.is_dispatcher) const SummaryDispatchesScreen(),
+      const ListChatsScreen(),
       const SettingsScreen(),
     ];
 
@@ -59,6 +61,10 @@ class _MainAppScreenState extends State<MainAppScreen> {
           icon: Icon(Icons.manage_accounts),
           label: "סדרנות",
         ),
+      const BottomNavigationBarItem(
+        icon: Icon(Icons.chat),
+        label: "צ'אט",
+      ),
       const BottomNavigationBarItem(
         icon: Icon(Icons.settings),
         label: "הגדרות",
