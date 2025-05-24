@@ -5,8 +5,7 @@ class SettingsLocalDataSource {
   Future<Settings> getSettings() async {
     final prefs = await SharedPreferences.getInstance();
     final isDarkMode = prefs.getBool("isDarkMode") ?? false;
-    final isEnglish = prefs.getBool("isEnglish") ?? false;
-    return Settings(isDarkMode: isDarkMode,isEnglish:isEnglish);
+    return Settings(isDarkMode: isDarkMode);
   }
 
   Future<void> setSettings(Settings settings) async {

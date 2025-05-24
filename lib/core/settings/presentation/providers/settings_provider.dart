@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class SettingsProvider extends ChangeNotifier{
   final GetSettings getSettings;
   final SetSettings setSettings;
-  Settings _settings = Settings(isDarkMode: false,isEnglish:false);
+  Settings _settings = Settings(isDarkMode: false);
   SettingsProvider(this.getSettings,this.setSettings){
     _loadSettings();
   }
@@ -18,12 +18,7 @@ class SettingsProvider extends ChangeNotifier{
   }
 
   Future<void> updateDarkMode(bool isDarkMode) async {
-    _settings = Settings(isDarkMode: isDarkMode,isEnglish: _settings.isEnglish);
-    await setSettings(_settings);
-    notifyListeners();
-  }
-  Future<void> updateIsEnglish(bool isEnglish) async {
-    _settings = Settings(isDarkMode: _settings.isDarkMode,isEnglish: isEnglish);
+    _settings = Settings(isDarkMode: isDarkMode);
     await setSettings(_settings);
     notifyListeners();
   }
