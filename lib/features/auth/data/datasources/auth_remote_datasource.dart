@@ -1,18 +1,19 @@
-import 'dart:convert';
 import 'package:driver_app/features/auth/data/datasources/response_handlers.dart';
 import 'package:driver_app/features/auth/domain/entities/auth_user.dart';
 import 'package:http/http.dart' as http;
-
 
 class AuthRemoteDatasource {
   final String url;
   AuthRemoteDatasource(this.url);
   Future<AuthUser> login(String username, String id) async {
+    final Map<String, String> queryParameters = {
+      'username': username,
+      'login_key': id,
+    };
     try {
-      final response = await http.post(
-        Uri.http(url, 'api/jwt/create-token'),
+      final response = await http.get(
+        Uri.http(url, 'api/driver/get-driver-by-credentials', queryParameters),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode({'username': username, 'driver_key': id}),
       );
       return loginResponseHandler(response);
     } catch (e) {

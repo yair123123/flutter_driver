@@ -11,7 +11,7 @@ class StationListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final User? user = context.watch<UserProvider>().user;
-    final List<Station> stations = user?.stations ?? [];
+    final List<Station> stations = user?.driver_stations ?? [];
 
     const Color elegantGold = Color(0xFFFFD700);
 
@@ -21,7 +21,7 @@ class StationListScreen extends StatelessWidget {
         itemCount: stations.length,
         itemBuilder: (context, index) {
           final station = stations[index];
-          final bool isVip = station.driver_status == "GOLD";
+          final bool isVip = station.driver_status_name == "GOLD";
 
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),

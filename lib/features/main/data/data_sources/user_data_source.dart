@@ -11,7 +11,7 @@ class UserDataSource {
   Future<User> getUser(String token) async {
     try {
       final response = await http.get(
-        Uri.http(url, "api/driver/get-driver"),
+        Uri.http(url, "api/driver/get-driver-by-jwt"),
         headers: {'Content-Type': 'application/json', "auth": token},
       );
 

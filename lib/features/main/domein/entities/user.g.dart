@@ -8,14 +8,18 @@ part of 'user.dart';
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
   id: (json['id'] as num).toInt(),
-  driver_key: json['driver_key'] as String,
+  login_key: json['login_key'] as String,
   username: json['username'] as String,
   gender: json['gender'] as String,
   rating: (json['rating'] as num).toDouble(),
-  monthly_rides_sum: (json['monthly_rides_sum'] as num).toInt(),
+  payment_status: json['payment_status'] as bool,
   is_dispatcher: json['is_dispatcher'] as bool,
-  stations:
-      (json['stations'] as List<dynamic>)
+  dispatcher_stations:
+      (json['dispatcher_stations'] as List<dynamic>)
+          .map((e) => Station.fromJson(e as Map<String, dynamic>))
+          .toList(),
+  driver_stations:
+      (json['driver_stations'] as List<dynamic>)
           .map((e) => Station.fromJson(e as Map<String, dynamic>))
           .toList(),
 );
@@ -23,11 +27,12 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'driver_key': instance.driver_key,
+      'login_key': instance.login_key,
       'username': instance.username,
       'gender': instance.gender,
       'rating': instance.rating,
-      'monthly_rides_sum': instance.monthly_rides_sum,
+      'payment_status': instance.payment_status,
       'is_dispatcher': instance.is_dispatcher,
-      'stations': instance.stations,
+      'dispatcher_stations': instance.dispatcher_stations,
+      'driver_stations': instance.driver_stations,
     };
