@@ -22,13 +22,14 @@ User _$UserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$User {
   int get id => throw _privateConstructorUsedError;
-  String get driver_key => throw _privateConstructorUsedError;
+  String get login_key => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
   double get rating => throw _privateConstructorUsedError;
-  int get monthly_rides_sum => throw _privateConstructorUsedError;
+  bool get payment_status => throw _privateConstructorUsedError;
   bool get is_dispatcher => throw _privateConstructorUsedError;
-  List<Station> get stations => throw _privateConstructorUsedError;
+  List<Station> get dispatcher_stations => throw _privateConstructorUsedError;
+  List<Station> get driver_stations => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,13 +47,14 @@ abstract class $UserCopyWith<$Res> {
   @useResult
   $Res call({
     int id,
-    String driver_key,
+    String login_key,
     String username,
     String gender,
     double rating,
-    int monthly_rides_sum,
+    bool payment_status,
     bool is_dispatcher,
-    List<Station> stations,
+    List<Station> dispatcher_stations,
+    List<Station> driver_stations,
   });
 }
 
@@ -72,13 +74,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? id = null,
-    Object? driver_key = null,
+    Object? login_key = null,
     Object? username = null,
     Object? gender = null,
     Object? rating = null,
-    Object? monthly_rides_sum = null,
+    Object? payment_status = null,
     Object? is_dispatcher = null,
-    Object? stations = null,
+    Object? dispatcher_stations = null,
+    Object? driver_stations = null,
   }) {
     return _then(
       _value.copyWith(
@@ -87,10 +90,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
                     ? _value.id
                     : id // ignore: cast_nullable_to_non_nullable
                         as int,
-            driver_key:
-                null == driver_key
-                    ? _value.driver_key
-                    : driver_key // ignore: cast_nullable_to_non_nullable
+            login_key:
+                null == login_key
+                    ? _value.login_key
+                    : login_key // ignore: cast_nullable_to_non_nullable
                         as String,
             username:
                 null == username
@@ -107,20 +110,25 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
                     ? _value.rating
                     : rating // ignore: cast_nullable_to_non_nullable
                         as double,
-            monthly_rides_sum:
-                null == monthly_rides_sum
-                    ? _value.monthly_rides_sum
-                    : monthly_rides_sum // ignore: cast_nullable_to_non_nullable
-                        as int,
+            payment_status:
+                null == payment_status
+                    ? _value.payment_status
+                    : payment_status // ignore: cast_nullable_to_non_nullable
+                        as bool,
             is_dispatcher:
                 null == is_dispatcher
                     ? _value.is_dispatcher
                     : is_dispatcher // ignore: cast_nullable_to_non_nullable
                         as bool,
-            stations:
-                null == stations
-                    ? _value.stations
-                    : stations // ignore: cast_nullable_to_non_nullable
+            dispatcher_stations:
+                null == dispatcher_stations
+                    ? _value.dispatcher_stations
+                    : dispatcher_stations // ignore: cast_nullable_to_non_nullable
+                        as List<Station>,
+            driver_stations:
+                null == driver_stations
+                    ? _value.driver_stations
+                    : driver_stations // ignore: cast_nullable_to_non_nullable
                         as List<Station>,
           )
           as $Val,
@@ -138,13 +146,14 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @useResult
   $Res call({
     int id,
-    String driver_key,
+    String login_key,
     String username,
     String gender,
     double rating,
-    int monthly_rides_sum,
+    bool payment_status,
     bool is_dispatcher,
-    List<Station> stations,
+    List<Station> dispatcher_stations,
+    List<Station> driver_stations,
   });
 }
 
@@ -161,13 +170,14 @@ class __$$UserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? driver_key = null,
+    Object? login_key = null,
     Object? username = null,
     Object? gender = null,
     Object? rating = null,
-    Object? monthly_rides_sum = null,
+    Object? payment_status = null,
     Object? is_dispatcher = null,
-    Object? stations = null,
+    Object? dispatcher_stations = null,
+    Object? driver_stations = null,
   }) {
     return _then(
       _$UserImpl(
@@ -176,10 +186,10 @@ class __$$UserImplCopyWithImpl<$Res>
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
                     as int,
-        driver_key:
-            null == driver_key
-                ? _value.driver_key
-                : driver_key // ignore: cast_nullable_to_non_nullable
+        login_key:
+            null == login_key
+                ? _value.login_key
+                : login_key // ignore: cast_nullable_to_non_nullable
                     as String,
         username:
             null == username
@@ -196,20 +206,25 @@ class __$$UserImplCopyWithImpl<$Res>
                 ? _value.rating
                 : rating // ignore: cast_nullable_to_non_nullable
                     as double,
-        monthly_rides_sum:
-            null == monthly_rides_sum
-                ? _value.monthly_rides_sum
-                : monthly_rides_sum // ignore: cast_nullable_to_non_nullable
-                    as int,
+        payment_status:
+            null == payment_status
+                ? _value.payment_status
+                : payment_status // ignore: cast_nullable_to_non_nullable
+                    as bool,
         is_dispatcher:
             null == is_dispatcher
                 ? _value.is_dispatcher
                 : is_dispatcher // ignore: cast_nullable_to_non_nullable
                     as bool,
-        stations:
-            null == stations
-                ? _value._stations
-                : stations // ignore: cast_nullable_to_non_nullable
+        dispatcher_stations:
+            null == dispatcher_stations
+                ? _value._dispatcher_stations
+                : dispatcher_stations // ignore: cast_nullable_to_non_nullable
+                    as List<Station>,
+        driver_stations:
+            null == driver_stations
+                ? _value._driver_stations
+                : driver_stations // ignore: cast_nullable_to_non_nullable
                     as List<Station>,
       ),
     );
@@ -221,14 +236,16 @@ class __$$UserImplCopyWithImpl<$Res>
 class _$UserImpl implements _User {
   const _$UserImpl({
     required this.id,
-    required this.driver_key,
+    required this.login_key,
     required this.username,
     required this.gender,
     required this.rating,
-    required this.monthly_rides_sum,
+    required this.payment_status,
     required this.is_dispatcher,
-    required final List<Station> stations,
-  }) : _stations = stations;
+    required final List<Station> dispatcher_stations,
+    required final List<Station> driver_stations,
+  }) : _dispatcher_stations = dispatcher_stations,
+       _driver_stations = driver_stations;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -236,7 +253,7 @@ class _$UserImpl implements _User {
   @override
   final int id;
   @override
-  final String driver_key;
+  final String login_key;
   @override
   final String username;
   @override
@@ -244,20 +261,29 @@ class _$UserImpl implements _User {
   @override
   final double rating;
   @override
-  final int monthly_rides_sum;
+  final bool payment_status;
   @override
   final bool is_dispatcher;
-  final List<Station> _stations;
+  final List<Station> _dispatcher_stations;
   @override
-  List<Station> get stations {
-    if (_stations is EqualUnmodifiableListView) return _stations;
+  List<Station> get dispatcher_stations {
+    if (_dispatcher_stations is EqualUnmodifiableListView)
+      return _dispatcher_stations;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_stations);
+    return EqualUnmodifiableListView(_dispatcher_stations);
+  }
+
+  final List<Station> _driver_stations;
+  @override
+  List<Station> get driver_stations {
+    if (_driver_stations is EqualUnmodifiableListView) return _driver_stations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_driver_stations);
   }
 
   @override
   String toString() {
-    return 'User(id: $id, driver_key: $driver_key, username: $username, gender: $gender, rating: $rating, monthly_rides_sum: $monthly_rides_sum, is_dispatcher: $is_dispatcher, stations: $stations)';
+    return 'User(id: $id, login_key: $login_key, username: $username, gender: $gender, rating: $rating, payment_status: $payment_status, is_dispatcher: $is_dispatcher, dispatcher_stations: $dispatcher_stations, driver_stations: $driver_stations)';
   }
 
   @override
@@ -266,17 +292,24 @@ class _$UserImpl implements _User {
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.driver_key, driver_key) ||
-                other.driver_key == driver_key) &&
+            (identical(other.login_key, login_key) ||
+                other.login_key == login_key) &&
             (identical(other.username, username) ||
                 other.username == username) &&
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.rating, rating) || other.rating == rating) &&
-            (identical(other.monthly_rides_sum, monthly_rides_sum) ||
-                other.monthly_rides_sum == monthly_rides_sum) &&
+            (identical(other.payment_status, payment_status) ||
+                other.payment_status == payment_status) &&
             (identical(other.is_dispatcher, is_dispatcher) ||
                 other.is_dispatcher == is_dispatcher) &&
-            const DeepCollectionEquality().equals(other._stations, _stations));
+            const DeepCollectionEquality().equals(
+              other._dispatcher_stations,
+              _dispatcher_stations,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._driver_stations,
+              _driver_stations,
+            ));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -284,13 +317,14 @@ class _$UserImpl implements _User {
   int get hashCode => Object.hash(
     runtimeType,
     id,
-    driver_key,
+    login_key,
     username,
     gender,
     rating,
-    monthly_rides_sum,
+    payment_status,
     is_dispatcher,
-    const DeepCollectionEquality().hash(_stations),
+    const DeepCollectionEquality().hash(_dispatcher_stations),
+    const DeepCollectionEquality().hash(_driver_stations),
   );
 
   /// Create a copy of User
@@ -310,13 +344,14 @@ class _$UserImpl implements _User {
 abstract class _User implements User {
   const factory _User({
     required final int id,
-    required final String driver_key,
+    required final String login_key,
     required final String username,
     required final String gender,
     required final double rating,
-    required final int monthly_rides_sum,
+    required final bool payment_status,
     required final bool is_dispatcher,
-    required final List<Station> stations,
+    required final List<Station> dispatcher_stations,
+    required final List<Station> driver_stations,
   }) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -324,7 +359,7 @@ abstract class _User implements User {
   @override
   int get id;
   @override
-  String get driver_key;
+  String get login_key;
   @override
   String get username;
   @override
@@ -332,11 +367,13 @@ abstract class _User implements User {
   @override
   double get rating;
   @override
-  int get monthly_rides_sum;
+  bool get payment_status;
   @override
   bool get is_dispatcher;
   @override
-  List<Station> get stations;
+  List<Station> get dispatcher_stations;
+  @override
+  List<Station> get driver_stations;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.

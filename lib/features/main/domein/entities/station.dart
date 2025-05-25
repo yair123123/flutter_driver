@@ -8,8 +8,7 @@ class Station with _$Station {
   const factory Station({
     required int station_id,
     required String station_name,
-    required String driver_status,
-    required bool is_dispatcher,
+    String? driver_status_name,
   }) = _Station;
 
   factory Station.fromJson(Map<String, dynamic> json) =>
