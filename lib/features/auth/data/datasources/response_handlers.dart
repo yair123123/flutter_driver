@@ -9,7 +9,7 @@ Future<AuthUser> loginResponseHandler(http.Response response) {
   final data = json.decode(response.body);
 
   switch(response.statusCode) {
-    case 201:
+    case 200:
       ResponseAuthUser res = ResponseAuthUser.fromJson(data);
       return Future.value(res.content!);
 
