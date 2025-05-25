@@ -7,7 +7,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(      
+    return Scaffold(
       body: Consumer<SettingsProvider>(
         builder: (context, Provider, child) {
           return ListView(
@@ -15,10 +15,10 @@ class SettingsScreen extends StatelessWidget {
             children: [
               SwitchListTile(
                 value: Provider.settings.isDarkMode,
-                onChanged:(value) =>  Provider.updateDarkMode(value),
+                onChanged: (value) => Provider.updateDarkMode(value),
                 title: Text("מצב כהה"),
               ),
-            ],
+                        ],
           );
         },
       ),
