@@ -21,8 +21,9 @@ RideDto _$RideDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RideDto {
-  String get type => throw _privateConstructorUsedError;
-  Ride get ride => throw _privateConstructorUsedError;
+  int get typeCode => throw _privateConstructorUsedError;
+  dynamic get content => throw _privateConstructorUsedError;
+  String get error => throw _privateConstructorUsedError;
 
   /// Serializes this RideDto to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,9 +39,7 @@ abstract class $RideDtoCopyWith<$Res> {
   factory $RideDtoCopyWith(RideDto value, $Res Function(RideDto) then) =
       _$RideDtoCopyWithImpl<$Res, RideDto>;
   @useResult
-  $Res call({String type, Ride ride});
-
-  $RideCopyWith<$Res> get ride;
+  $Res call({int typeCode, dynamic content, String error});
 }
 
 /// @nodoc
@@ -57,32 +56,31 @@ class _$RideDtoCopyWithImpl<$Res, $Val extends RideDto>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? type = null, Object? ride = null}) {
+  $Res call({
+    Object? typeCode = null,
+    Object? content = freezed,
+    Object? error = null,
+  }) {
     return _then(
       _value.copyWith(
-            type:
-                null == type
-                    ? _value.type
-                    : type // ignore: cast_nullable_to_non_nullable
+            typeCode:
+                null == typeCode
+                    ? _value.typeCode
+                    : typeCode // ignore: cast_nullable_to_non_nullable
+                        as int,
+            content:
+                freezed == content
+                    ? _value.content
+                    : content // ignore: cast_nullable_to_non_nullable
+                        as dynamic,
+            error:
+                null == error
+                    ? _value.error
+                    : error // ignore: cast_nullable_to_non_nullable
                         as String,
-            ride:
-                null == ride
-                    ? _value.ride
-                    : ride // ignore: cast_nullable_to_non_nullable
-                        as Ride,
           )
           as $Val,
     );
-  }
-
-  /// Create a copy of RideDto
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $RideCopyWith<$Res> get ride {
-    return $RideCopyWith<$Res>(_value.ride, (value) {
-      return _then(_value.copyWith(ride: value) as $Val);
-    });
   }
 }
 
@@ -94,10 +92,7 @@ abstract class _$$RideDtoImplCopyWith<$Res> implements $RideDtoCopyWith<$Res> {
   ) = __$$RideDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String type, Ride ride});
-
-  @override
-  $RideCopyWith<$Res> get ride;
+  $Res call({int typeCode, dynamic content, String error});
 }
 
 /// @nodoc
@@ -113,19 +108,28 @@ class __$$RideDtoImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? type = null, Object? ride = null}) {
+  $Res call({
+    Object? typeCode = null,
+    Object? content = freezed,
+    Object? error = null,
+  }) {
     return _then(
       _$RideDtoImpl(
-        type:
-            null == type
-                ? _value.type
-                : type // ignore: cast_nullable_to_non_nullable
+        typeCode:
+            null == typeCode
+                ? _value.typeCode
+                : typeCode // ignore: cast_nullable_to_non_nullable
+                    as int,
+        content:
+            freezed == content
+                ? _value.content
+                : content // ignore: cast_nullable_to_non_nullable
+                    as dynamic,
+        error:
+            null == error
+                ? _value.error
+                : error // ignore: cast_nullable_to_non_nullable
                     as String,
-        ride:
-            null == ride
-                ? _value.ride
-                : ride // ignore: cast_nullable_to_non_nullable
-                    as Ride,
       ),
     );
   }
@@ -134,19 +138,25 @@ class __$$RideDtoImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$RideDtoImpl implements _RideDto {
-  const _$RideDtoImpl({required this.type, required this.ride});
+  const _$RideDtoImpl({
+    required this.typeCode,
+    required this.content,
+    required this.error,
+  });
 
   factory _$RideDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$RideDtoImplFromJson(json);
 
   @override
-  final String type;
+  final int typeCode;
   @override
-  final Ride ride;
+  final dynamic content;
+  @override
+  final String error;
 
   @override
   String toString() {
-    return 'RideDto(type: $type, ride: $ride)';
+    return 'RideDto(typeCode: $typeCode, content: $content, error: $error)';
   }
 
   @override
@@ -154,13 +164,20 @@ class _$RideDtoImpl implements _RideDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RideDtoImpl &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.ride, ride) || other.ride == ride));
+            (identical(other.typeCode, typeCode) ||
+                other.typeCode == typeCode) &&
+            const DeepCollectionEquality().equals(other.content, content) &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, type, ride);
+  int get hashCode => Object.hash(
+    runtimeType,
+    typeCode,
+    const DeepCollectionEquality().hash(content),
+    error,
+  );
 
   /// Create a copy of RideDto
   /// with the given fields replaced by the non-null parameter values.
@@ -178,16 +195,19 @@ class _$RideDtoImpl implements _RideDto {
 
 abstract class _RideDto implements RideDto {
   const factory _RideDto({
-    required final String type,
-    required final Ride ride,
+    required final int typeCode,
+    required final dynamic content,
+    required final String error,
   }) = _$RideDtoImpl;
 
   factory _RideDto.fromJson(Map<String, dynamic> json) = _$RideDtoImpl.fromJson;
 
   @override
-  String get type;
+  int get typeCode;
   @override
-  Ride get ride;
+  dynamic get content;
+  @override
+  String get error;
 
   /// Create a copy of RideDto
   /// with the given fields replaced by the non-null parameter values.
