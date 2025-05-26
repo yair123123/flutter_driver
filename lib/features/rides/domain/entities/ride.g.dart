@@ -7,18 +7,18 @@ part of 'ride.dart';
 // **************************************************************************
 
 _$RideImpl _$$RideImplFromJson(Map<String, dynamic> json) => _$RideImpl(
-  id: json['id'] as String,
-  details: json['details'] as String,
-  dispatcherId: json['dispatcherId'] as String,
-  stationId: json['stationId'] as String,
+  id: (json['id'] as num).toInt(),
+  stationId: (json['stationId'] as num).toInt(),
+  dispatcherId: (json['dispatcherId'] as num).toInt(),
   timestamp: DateTime.parse(json['timestamp'] as String),
+  details: json['details'] as String,
 );
 
 Map<String, dynamic> _$$RideImplToJson(_$RideImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'details': instance.details,
-      'dispatcherId': instance.dispatcherId,
       'stationId': instance.stationId,
+      'dispatcherId': instance.dispatcherId,
       'timestamp': instance.timestamp.toIso8601String(),
+      'details': instance.details,
     };

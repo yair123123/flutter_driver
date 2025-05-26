@@ -1,5 +1,5 @@
 import 'package:driver_app/features/rides/presentation/screens/map_screen.dart';
-import 'package:driver_app/features/rides/presentation/screens/station_list_screen.dart';
+import 'package:driver_app/features/rides/presentation/screens/stations_list_screen.dart';
 import 'package:flutter/material.dart';
 
 class RidesScreens extends StatefulWidget {
@@ -9,6 +9,7 @@ class RidesScreens extends StatefulWidget {
 }
 
 class _RidesScreens extends State<RidesScreens> {
+  
   int _selectedIndex = 0;
   void _onTap(int index) {
     setState(() {
