@@ -5,8 +5,8 @@ import 'package:driver_app/widgets/vip_tag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class StationListScreen extends ConsumerWidget {
-  const StationListScreen({super.key});
+class StationsListScreen extends ConsumerWidget {
+  const StationsListScreen({super.key});
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
