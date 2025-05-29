@@ -3,9 +3,10 @@ import 'package:driver_app/features/rides/presentation/screens/stations_list_scr
 import 'package:flutter/material.dart';
 
 class RidesScreens extends StatefulWidget {
-  const RidesScreens({super.key});
+  final Widget child;
+  const RidesScreens({super.key, required this.child});
   @override
-  _RidesScreens createState() => _RidesScreens();
+  State<RidesScreens> createState() => _RidesScreens();
 }
 
 class _RidesScreens extends State<RidesScreens> {
@@ -19,7 +20,7 @@ class _RidesScreens extends State<RidesScreens> {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> screens = [const StationListScreen(),const MapScreen()];
+    final List<Widget> screens = [const StationsListScreen(),const MapScreen()];
     final List<BottomNavigationBarItem> navItems = [
       const BottomNavigationBarItem(icon: Icon(Icons.list), label: "רשימה"),
       const BottomNavigationBarItem(icon: Icon(Icons.map), label: "מפה"),

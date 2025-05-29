@@ -1,31 +1,34 @@
-import 'package:driver_app/features/auth/presentation/providers/auth_provider.dart';
+import 'package:driver_app/core/providers/auth_provider.dart';
 import 'package:driver_app/features/main/presentation/screens/main_app_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginScreen extends StatelessWidget {
-  final userNameController = TextEditingController();
-  final idController = TextEditingController();
+class LoginScreen extends ConsumerWidget {
 
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+  final userNameController = TextEditingController();
+  final idController = TextEditingController();
+  final notifier = ref.read(authProvider.notifier);
+  final state = ref.watch(authProvider);
     return Scaffold(
       backgroundColor: const Color(0xFFEFF3F6),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
-          child: Consumer<AuthProvider>(
-            builder: (context, provider, child) {
-              if (provider.user != null) {
+          child: Builder(
+            builder: (context) {
+              if (state.user != null) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (_) => MainAppScreen()),
+                    MaterialPageRoute(builder: (_) => MainTabsShell()),
                   );
                 });
+                return const SizedBox.shrink();
               }
 
               return Card(
@@ -70,7 +73,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      provider.isLoading
+                      state.isLoading
                           ? const CircularProgressIndicator()
                           : SizedBox(
                               width: double.infinity,
@@ -78,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                                 key: const Key("loginButton"),
                                 icon: const Icon(Icons.login),
                                 label: const Text("התחבר"),
-                                onPressed: () => provider.login(
+                                onPressed: () => notifier.login(
                                   userNameController.text,
                                   idController.text,
                                 ),
@@ -90,10 +93,10 @@ class LoginScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                      if (provider.errorMessage != null) ...[
+                      if (state.errorMessage != null) ...[
                         const SizedBox(height: 16),
                         Text(
-                          "⚠ ${provider.errorMessage}",
+                          "⚠ ${state.errorMessage}",
                           style: const TextStyle(color: Colors.red),
                         ),
                       ],

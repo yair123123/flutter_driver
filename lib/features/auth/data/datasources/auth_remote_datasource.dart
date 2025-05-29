@@ -1,4 +1,5 @@
-import 'package:driver_app/features/auth/data/datasources/response_handlers.dart';
+import 'dart:convert';
+import 'package:driver_app/core/http/http_response_handler.dart';
 import 'package:driver_app/features/auth/domain/entities/auth_user.dart';
 import 'package:http/http.dart' as http;
 
@@ -15,7 +16,7 @@ class AuthRemoteDatasource {
         Uri.http(url, 'api/driver/get-driver-by-credentials', queryParameters),
         headers: {'Content-Type': 'application/json'},
       );
-      return loginResponseHandler(response);
+      return responseHandler(response) as Future<AuthUser>;
     } catch (e) {
       return Future.error("שגיאת תקשורת: $e");
     }

@@ -8,14 +8,15 @@ import 'package:driver_app/widgets/driver_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MainAppScreen extends StatefulWidget {
-  const MainAppScreen({super.key});
+class MainTabsShell extends StatefulWidget {
+  final Widget child;
+  const MainTabsShell({super.key,required this.child});
 
   @override
-  _MainAppScreenState createState() => _MainAppScreenState();
+  State<MainTabsShell> createState() => _MainTabsShellState();
 }
 
-class _MainAppScreenState extends State<MainAppScreen> {
+class _MainTabsShellState extends State<MainTabsShell> {
   int _selectedIndex = 0;
 
   @override

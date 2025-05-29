@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:driver_app/core/websocket/websocket_dto.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 typedef WebSocketMessageHandler = void Function(Map<String, dynamic> message);
@@ -30,8 +31,24 @@ class WebSocketService {
     );
   }
 
-  void send(dynamic message) {
-    _channel?.sink.add(message is String ? message : jsonEncode(message));
+  Stream<WebSocketDto> get webSocketDto {
+    return stream
+        .map((rawMessage) {
+          try {
+            final map =
+                rawMessage is String ? jsonDecode(rawMessage) : rawMessage;
+            return webSocketDtoFromJson(map);
+          } catch (e) {
+            print(e);
+            return null;
+          }
+        })
+        .where((d) => d != null)
+        .cast<WebSocketDto>();
+  }
+
+  void send(WebSocketDto message) {
+    _channel?.sink.add(webSocketDtoToJson(message));
   }
 
   void disconnect() {

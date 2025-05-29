@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
       case LoginCheckResult.success:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (_) => MainAppScreen()),
+          MaterialPageRoute(builder: (_) => MainTabsShell()),
         );
         break;
       case LoginCheckResult.noToken:
