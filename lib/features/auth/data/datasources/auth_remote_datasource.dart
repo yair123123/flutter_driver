@@ -16,7 +16,7 @@ class AuthRemoteDatasource {
         Uri.http(url, 'api/driver/get-driver-by-credentials', queryParameters),
         headers: {'Content-Type': 'application/json'},
       );
-      return responseHandler(response) as Future<AuthUser>;
+      return responseHandler(response);
     } catch (e) {
       return Future.error("שגיאת תקשורת: $e");
     }
