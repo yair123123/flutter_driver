@@ -1,62 +1,45 @@
-import 'dart:async';
-
-import 'package:driver_app/features/auth/domain/entities/auth_user.dart';
-import 'package:driver_app/features/auth/domain/entities/login_check_result.dart';
 import 'package:driver_app/features/auth/domain/usecases/clear_token.dart';
 import 'package:driver_app/features/auth/domain/usecases/get_saved_token.dart';
 import 'package:driver_app/features/auth/domain/usecases/login.dart';
 import 'package:driver_app/features/auth/domain/usecases/validate_token.dart';
-import 'package:flutter/material.dart';
+import 'package:driver_app/features/auth/presentation/providers/auth_state.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AuthProvider extends ChangeNotifier {
+class AuthNotifier extends StateNotifier<AuthState> {
   final GetSavedToken getSavedToken;
   final ValidateToken validateToken;
   final ClearToken clearToken;
   final Login loginUseCase;
-  AuthUser? _user;
-  bool _isLoading = false;
 
-  AuthProvider(
-    this.loginUseCase,
+  AuthNotifier(
     this.getSavedToken,
     this.validateToken,
     this.clearToken,
-  );
-  late String? token;
-  AuthUser? get user => _user;
-  bool get isLoading => _isLoading;
-  String? _errorMessage;
-  String? get errorMessage => _errorMessage;
-  String? _warnningMessage;
-  String? get warnningMessage => _warnningMessage;
-
-  void setWarnningMessage(String message) {
-    _warnningMessage = message;
-    notifyListeners();
+    this.loginUseCase,
+  ) : super(AuthState(splashStatus: AuthSplashStatus.loading)) {
+    checkSplashStatus();
   }
 
-  Future<void> login(String username, String password) async {
-    _errorMessage = null;
+  void setWarnningMessage(String message) {
+    state = state.copyWith(warnningMessage: message);
+  }
+
+  Future<void> login(String username, String id) async {
+    state = state.copyWith(errorMessage: null, isLoading: true);
     try {
-      _isLoading = true;
-      notifyListeners();
-      _user = await loginUseCase(username, password);
-      if (_user != null) {
-        token = _user!.jwt_token;
-      } else {
-        _errorMessage = "שגיאה לא ידועה";
-      }
+      final user = await loginUseCase(id, username);
+      state = state.copyWith(
+        user: user,
+        token: user.jwt_token,
+        isLoading: false,
+      );
     } catch (e) {
-      _errorMessage = e.toString();
-    } finally {
-      _isLoading = false;
-      notifyListeners();
+      state = state.copyWith(errorMessage: e.toString(), isLoading: false);
     }
   }
 
   Future<bool> checkToken(String token) async {
-    _errorMessage = null;
-
+    state = state.copyWith(errorMessage: null);
     bool isValid = await validateToken(token);
     if (isValid) {
       return true;
@@ -65,26 +48,27 @@ class AuthProvider extends ChangeNotifier {
     return false;
   }
 
-  Future<LoginCheckResult> checkLoginWithRetry() async {
-    token = await getSavedToken();
+  Future<void> checkSplashStatus() async {
+    final token = await getSavedToken();
     if (token == null) {
-      return LoginCheckResult.noToken;
+      state = state.copyWith(splashStatus: AuthSplashStatus.needLogin);
+      return;
     }
-
-    int attempts = 0;
-    const int maxAttempts = 3;
-    while (attempts < maxAttempts) {
-      try {
-        bool isValid = await checkToken(token!);
-        if (isValid) return LoginCheckResult.success;
-        return LoginCheckResult.noToken;
-      } catch (e) {
-        attempts++;
-        await Future.delayed(Duration(seconds: 5));
-        setWarnningMessage("התקשורת איטית, מנסה להתחבר שוב...");
+    try {
+      bool isValid = await validateToken(token);
+      if (isValid) {
+        state = state.copyWith(
+          splashStatus: AuthSplashStatus.success,
+          token: token,
+        );
+        return;
       }
+    } catch (e) {
+      state = state.copyWith(
+        splashStatus: AuthSplashStatus.error,
+        errorMessage: e.toString(),
+      );
+      return;
     }
-
-    return LoginCheckResult.serverError;
   }
 }

@@ -19,45 +19,54 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(path: "/", builder: (context, state) => const SplashScreen()),
       GoRoute(path: "/login", builder: (context, state) => const LoginScreen()),
       ShellRoute(
-        builder: (context, state,child) =>  MainTabsShell(child: child,),
+        builder: (context, state, child) => MainTabsShell(child: child),
+        
         routes: [
           GoRoute(
-            path: '/main/dispatch',
+            path: 'main/dispatch',
             builder: (context, state) => const DispatchScreen(),
           ),
           ShellRoute(
-            builder: (context, state,child) => RidesScreens(child: child,),
+            builder: (context, state, child) => RidesScreens(),
             routes: [
               GoRoute(
-                path: '/main/rides/list',
+                path: 'main/rides/list',
                 builder: (context, state) => const StationsListScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'group/:groupId',
+                    builder: (context, state) {
+                      final groupId = state.pathParameters['groupId'];
+                      return GroupChatScreen(groupId: groupId!);
+                    },
+                  ),
+                ],
               ),
               GoRoute(
-                path: '/main/rides/map',
+                path: 'main/rides/map',
                 builder: (context, state) => const MapScreen(),
               ),
             ],
           ),
           GoRoute(
-            path: '/main/chats',
+            path: 'main/chats',
             builder: (context, state) => const ListChatsScreen(),
+            routes: [
+              GoRoute(
+                path: 'chat/:chatId',
+
+                builder: (context, state) {
+                  final chatId = state.pathParameters['chatId'];
+                  return ChatScreen(chatId: chatId!);
+                },
+              ),
+            ],
           ),
-      GoRoute(
-        path: '/main/chats/chat',
-        builder: (context, state) => const ChatScreen(),
-      ),
-      GoRoute(
-        path: '/main/settings',
-        builder: (context, state) => const SettingsScreen(),
-      ),
+          GoRoute(
+            path: 'main/settings',
+            builder: (context, state) => const SettingsScreen(),
+          ),
         ],
-      ),
-      GoRoute(
-        path: '/main/rides/list/group/:groupId',
-        builder: (context, state) {
-          final groupId = state.pathParameters['groupId'];
-          return GroupChatScreen(groupId: groupId!);
-        },
       ),
     ],
   );
