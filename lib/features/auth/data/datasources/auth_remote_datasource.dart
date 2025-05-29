@@ -14,7 +14,7 @@ class AuthRemoteDatasource {
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'username': username, 'driver_key': id}),
       );
-      return responseHandler(response) as Future<AuthUser>;
+      return responseHandler(response);
     } catch (e) {
       return Future.error("שגיאת תקשורת: $e");
     }
