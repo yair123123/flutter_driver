@@ -1,24 +1,30 @@
-import 'package:driver_app/core/settings/presentation/providers/settings_provider.dart';
+import 'package:driver_app/core/providers/settings_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settingsAsync = ref.watch(settingsProvider);
+
     return Scaffold(
-      body: Consumer<SettingsProvider>(
-        builder: (context, Provider, child) {
+      body: settingsAsync.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (e, st) => Center(child: Text("שגיאה: $e")),
+        data: (settings) {
           return ListView(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             children: [
               SwitchListTile(
-                value: Provider.settings.isDarkMode,
-                onChanged: (value) => Provider.updateDarkMode(value),
-                title: Text("מצב כהה"),
+                value: settings!.isDarkMode,
+                onChanged: (value) {
+                  ref.read(settingsProvider.notifier).updateDarkMode(value);
+                },
+                title: const Text("מצב כהה"),
               ),
-                        ],
+            ],
           );
         },
       ),

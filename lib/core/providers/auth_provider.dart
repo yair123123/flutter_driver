@@ -1,3 +1,4 @@
+import 'package:driver_app/core/env/env_web.dart';
 import 'package:driver_app/features/auth/data/datasources/auth_class_datasource.dart';
 import 'package:driver_app/features/auth/data/datasources/auth_local_datasource_mobile.dart';
 import 'package:driver_app/features/auth/data/datasources/auth_local_datasource_web.dart';
@@ -8,14 +9,14 @@ import 'package:driver_app/features/auth/domain/usecases/clear_token.dart';
 import 'package:driver_app/features/auth/domain/usecases/get_saved_token.dart';
 import 'package:driver_app/features/auth/domain/usecases/login.dart';
 import 'package:driver_app/features/auth/domain/usecases/validate_token.dart';
-import 'package:driver_app/features/auth/presentation/providers/auth_provider1.dart';
+import 'package:driver_app/features/auth/presentation/providers/auth_provider.dart';
 import 'package:driver_app/features/auth/presentation/providers/auth_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 final authRemoteDatasourceProvider = Provider<AuthRemoteDatasource>((ref) {
-  return AuthRemoteDatasource("df");
+  return AuthRemoteDatasource(Env.authUrl);
 });
 final authLocalDatasourceWProvider = Provider<AuthLocalDatasource>((ref) {
   return kIsWeb
