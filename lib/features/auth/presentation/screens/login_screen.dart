@@ -1,4 +1,5 @@
 import 'package:driver_app/core/providers/auth_provider.dart';
+import 'package:driver_app/features/auth/presentation/providers/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,7 +13,13 @@ class LoginScreen extends ConsumerWidget {
     final userNameController = TextEditingController();
     final idController = TextEditingController();
     final notifier = ref.read(authProvider.notifier);
-    final state = ref.watch(authProvider);
+  final state = ref.watch(authProvider);
+
+  ref.listen<AuthState>(authProvider, (previous, next) {
+    if (next.user != null && previous?.user == null) {
+      context.go("/main/rides/list");
+    }
+  });
     return Scaffold(
       backgroundColor: const Color(0xFFEFF3F6),
       body: Center(
@@ -20,10 +27,6 @@ class LoginScreen extends ConsumerWidget {
           padding: const EdgeInsets.all(24.0),
           child: Builder(
             builder: (context) {
-              if (state.user != null) {
-                context.go("/main/rides/list");
-                return const SizedBox.shrink();
-              }
 
               return Card(
                 elevation: 8,

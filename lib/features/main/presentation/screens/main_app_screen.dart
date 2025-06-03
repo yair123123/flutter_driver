@@ -31,14 +31,8 @@ class _MainTabsShellState extends ConsumerState<MainTabsShell> {
       }
     });
   }
-int getTabIndex(BuildContext context, User user) {
+int getTabIndex(BuildContext context, User user,List<String> routes ) {
   final location = GoRouterState.of(context).uri.toString();
-  final List<String> routes = [
-    '/main/rides',
-    if (user.is_dispatcher) '/main/dispatch',
-    '/main/chats',
-    '/main/settings',
-  ];
   final i = routes.indexWhere((r) => location.startsWith(r));
   return i >= 0 ? i : 0;
 }
@@ -73,7 +67,7 @@ int getTabIndex(BuildContext context, User user) {
         final routes = [
           "/main/rides/list",
           if (user.is_dispatcher) "/main/dispatcher/summary",
-          "/main/chat/list",
+          "/main/chats",
           "/main/settings",
         ];
         final navItems = [
@@ -92,7 +86,7 @@ int getTabIndex(BuildContext context, User user) {
             label: "הגדרות",
           ),
         ];
-      final currentIndex = getTabIndex(context, user);
+      final currentIndex = getTabIndex(context, user,routes);
 
         return Scaffold(
           appBar: DriverAppBar(user: user),

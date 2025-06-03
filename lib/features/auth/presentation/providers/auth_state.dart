@@ -7,6 +7,7 @@ class AuthState {
   final String? errorMessage;
   final String? warnningMessage;
   final String? token;
+  final bool? isLoggedIn;
 
   AuthState({
     this.splashStatus  = AuthSplashStatus.loading,
@@ -15,6 +16,7 @@ class AuthState {
     this.errorMessage,
     this.warnningMessage,
     this.token,
+    this.isLoggedIn,
   });
   AuthState copyWith({
     AuthSplashStatus? splashStatus,
@@ -23,6 +25,7 @@ class AuthState {
     String? errorMessage,
     String? warnningMessage,
     String? token,
+    bool? isLoggedIn 
   }) {
     return AuthState(
       splashStatus: splashStatus ?? this.splashStatus,
@@ -31,6 +34,7 @@ class AuthState {
       errorMessage: errorMessage ?? this.errorMessage,
       warnningMessage: warnningMessage ?? this.warnningMessage,
       token: token ?? this.token,
+      isLoggedIn: isLoggedIn ?? this.isLoggedIn
     );
   }
 }

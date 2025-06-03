@@ -1,3 +1,4 @@
+import 'package:driver_app/core/env/env.dart';
 import 'package:driver_app/features/rides/data/datasources/ride_http_datasource.dart';
 import 'package:driver_app/features/rides/data/repositories/ride_http_repository_impl.dart';
 import 'package:driver_app/features/rides/domain/entities/group.dart';
@@ -22,7 +23,7 @@ class GroupsNotifier extends StateNotifier<List<Group>> {
 
 final groupsProvider = StateNotifierProvider<GroupsNotifier, List<Group>>(
   (ref)  {
-    final apiDatasource = RideHttpDatasource("");
+    final apiDatasource = RideHttpDatasource(Env.authUrl);
   final repo = RideHttpRepositoryImpl(apiDatasource);
   final fetchGroupsUsecase = FetchGroupsUsecase(repo);
   return GroupsNotifier(fetchGroupsUsecase);
