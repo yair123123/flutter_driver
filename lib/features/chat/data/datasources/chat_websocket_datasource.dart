@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:driver_app/core/websocket/websocket_dto.dart';
 import 'package:driver_app/core/websocket/websocket_service.dart';
+import 'package:driver_app/features/chat/domain/entites/message.dart';
 import 'package:driver_app/features/rides/domain/entities/ride_dto.dart';
 
 class MessagesWebSocketDatasource {
@@ -21,11 +23,7 @@ class MessagesWebSocketDatasource {
         .cast<RideDto>();
   }
 
-  void sendRideAction(String action, {required String rideId}) {
-    wbSocket.send({
-      'type': action, 
-      'rideId': rideId,
-      'timestamp': DateTime.now().toIso8601String(),
-    });
+  void sendMessage(Message message) {
+    wbSocket.send(WebSocketDto(content: message, typeCode: 30));
   }
 }

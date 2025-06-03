@@ -21,11 +21,11 @@ Ride _$RideFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Ride {
-  String get id => throw _privateConstructorUsedError;
-  String get details => throw _privateConstructorUsedError;
-  String get dispatcherId => throw _privateConstructorUsedError;
-  String get stationId => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  int get stationId => throw _privateConstructorUsedError;
+  int get dispatcherId => throw _privateConstructorUsedError;
   DateTime get timestamp => throw _privateConstructorUsedError;
+  String get details => throw _privateConstructorUsedError;
 
   /// Serializes this Ride to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -42,11 +42,11 @@ abstract class $RideCopyWith<$Res> {
       _$RideCopyWithImpl<$Res, Ride>;
   @useResult
   $Res call({
-    String id,
-    String details,
-    String dispatcherId,
-    String stationId,
+    int id,
+    int stationId,
+    int dispatcherId,
     DateTime timestamp,
+    String details,
   });
 }
 
@@ -66,10 +66,10 @@ class _$RideCopyWithImpl<$Res, $Val extends Ride>
   @override
   $Res call({
     Object? id = null,
-    Object? details = null,
-    Object? dispatcherId = null,
     Object? stationId = null,
+    Object? dispatcherId = null,
     Object? timestamp = null,
+    Object? details = null,
   }) {
     return _then(
       _value.copyWith(
@@ -77,27 +77,27 @@ class _$RideCopyWithImpl<$Res, $Val extends Ride>
                 null == id
                     ? _value.id
                     : id // ignore: cast_nullable_to_non_nullable
-                        as String,
-            details:
-                null == details
-                    ? _value.details
-                    : details // ignore: cast_nullable_to_non_nullable
-                        as String,
-            dispatcherId:
-                null == dispatcherId
-                    ? _value.dispatcherId
-                    : dispatcherId // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
             stationId:
                 null == stationId
                     ? _value.stationId
                     : stationId // ignore: cast_nullable_to_non_nullable
-                        as String,
+                        as int,
+            dispatcherId:
+                null == dispatcherId
+                    ? _value.dispatcherId
+                    : dispatcherId // ignore: cast_nullable_to_non_nullable
+                        as int,
             timestamp:
                 null == timestamp
                     ? _value.timestamp
                     : timestamp // ignore: cast_nullable_to_non_nullable
                         as DateTime,
+            details:
+                null == details
+                    ? _value.details
+                    : details // ignore: cast_nullable_to_non_nullable
+                        as String,
           )
           as $Val,
     );
@@ -113,11 +113,11 @@ abstract class _$$RideImplCopyWith<$Res> implements $RideCopyWith<$Res> {
   @override
   @useResult
   $Res call({
-    String id,
-    String details,
-    String dispatcherId,
-    String stationId,
+    int id,
+    int stationId,
+    int dispatcherId,
     DateTime timestamp,
+    String details,
   });
 }
 
@@ -134,10 +134,10 @@ class __$$RideImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? details = null,
-    Object? dispatcherId = null,
     Object? stationId = null,
+    Object? dispatcherId = null,
     Object? timestamp = null,
+    Object? details = null,
   }) {
     return _then(
       _$RideImpl(
@@ -145,27 +145,27 @@ class __$$RideImplCopyWithImpl<$Res>
             null == id
                 ? _value.id
                 : id // ignore: cast_nullable_to_non_nullable
-                    as String,
-        details:
-            null == details
-                ? _value.details
-                : details // ignore: cast_nullable_to_non_nullable
-                    as String,
-        dispatcherId:
-            null == dispatcherId
-                ? _value.dispatcherId
-                : dispatcherId // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
         stationId:
             null == stationId
                 ? _value.stationId
                 : stationId // ignore: cast_nullable_to_non_nullable
-                    as String,
+                    as int,
+        dispatcherId:
+            null == dispatcherId
+                ? _value.dispatcherId
+                : dispatcherId // ignore: cast_nullable_to_non_nullable
+                    as int,
         timestamp:
             null == timestamp
                 ? _value.timestamp
                 : timestamp // ignore: cast_nullable_to_non_nullable
                     as DateTime,
+        details:
+            null == details
+                ? _value.details
+                : details // ignore: cast_nullable_to_non_nullable
+                    as String,
       ),
     );
   }
@@ -176,29 +176,29 @@ class __$$RideImplCopyWithImpl<$Res>
 class _$RideImpl implements _Ride {
   const _$RideImpl({
     required this.id,
-    required this.details,
-    required this.dispatcherId,
     required this.stationId,
+    required this.dispatcherId,
     required this.timestamp,
+    required this.details,
   });
 
   factory _$RideImpl.fromJson(Map<String, dynamic> json) =>
       _$$RideImplFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
-  final String details;
+  final int stationId;
   @override
-  final String dispatcherId;
-  @override
-  final String stationId;
+  final int dispatcherId;
   @override
   final DateTime timestamp;
+  @override
+  final String details;
 
   @override
   String toString() {
-    return 'Ride(id: $id, details: $details, dispatcherId: $dispatcherId, stationId: $stationId, timestamp: $timestamp)';
+    return 'Ride(id: $id, stationId: $stationId, dispatcherId: $dispatcherId, timestamp: $timestamp, details: $details)';
   }
 
   @override
@@ -207,19 +207,19 @@ class _$RideImpl implements _Ride {
         (other.runtimeType == runtimeType &&
             other is _$RideImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.details, details) || other.details == details) &&
-            (identical(other.dispatcherId, dispatcherId) ||
-                other.dispatcherId == dispatcherId) &&
             (identical(other.stationId, stationId) ||
                 other.stationId == stationId) &&
+            (identical(other.dispatcherId, dispatcherId) ||
+                other.dispatcherId == dispatcherId) &&
             (identical(other.timestamp, timestamp) ||
-                other.timestamp == timestamp));
+                other.timestamp == timestamp) &&
+            (identical(other.details, details) || other.details == details));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, details, dispatcherId, stationId, timestamp);
+      Object.hash(runtimeType, id, stationId, dispatcherId, timestamp, details);
 
   /// Create a copy of Ride
   /// with the given fields replaced by the non-null parameter values.
@@ -237,25 +237,25 @@ class _$RideImpl implements _Ride {
 
 abstract class _Ride implements Ride {
   const factory _Ride({
-    required final String id,
-    required final String details,
-    required final String dispatcherId,
-    required final String stationId,
+    required final int id,
+    required final int stationId,
+    required final int dispatcherId,
     required final DateTime timestamp,
+    required final String details,
   }) = _$RideImpl;
 
   factory _Ride.fromJson(Map<String, dynamic> json) = _$RideImpl.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
-  String get details;
+  int get stationId;
   @override
-  String get dispatcherId;
-  @override
-  String get stationId;
+  int get dispatcherId;
   @override
   DateTime get timestamp;
+  @override
+  String get details;
 
   /// Create a copy of Ride
   /// with the given fields replaced by the non-null parameter values.

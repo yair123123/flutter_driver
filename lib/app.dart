@@ -1,44 +1,43 @@
-import 'package:driver_app/core/di/app_di.dart';
-import 'package:driver_app/core/settings/presentation/providers/settings_provider.dart';
-import 'package:driver_app/core/theme/app_theme.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-
-import 'package:driver_app/features/auth/presentation/screens/splash_screen.dart';
+import 'package:driver_app/core/providers/settings_provider.dart';
+import 'package:driver_app/core/router/app_router.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:driver_app/core/theme/app_theme.dart';
 
-class MyApp extends StatelessWidget {
+
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AppDI.getAuthProvider()),
-        ChangeNotifierProvider(create: (_) => AppDI.getUserProvider()),
-        ChangeNotifierProvider(create: (_) => AppDI.getSettingsProvider()),
-      ],
-      child: Consumer<SettingsProvider>(
-        builder: (context, settingsProvider, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            locale: const Locale('he'),
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            title: "דרייבר 10",
-            home: const SplashScreen(),
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode:
-                settingsProvider.settings.isDarkMode
-                    ? ThemeMode.dark
-                    : ThemeMode.light,
-          );
-        },
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(settingsProvider); 
+        final router = ref.watch(routerProvider); // ה-Provider שהגדרת למעלה!
+
+    return settings.when(
+      loading: () => const MaterialApp(
+        home: Scaffold(body: Center(child: CircularProgressIndicator())),
       ),
+      error: (error, stack) => MaterialApp(
+        home: Scaffold(body: Center(child: Text('שגיאה בטעינת הגדרות: $error'))),
+      ),
+      data: (settingsData) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          locale: const Locale('he'),
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          title: "דרייבר 10",
+          routerConfig: router,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: settingsData!.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+        );
+      },
     );
   }
 }
+
