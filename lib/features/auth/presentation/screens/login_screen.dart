@@ -1,32 +1,32 @@
-import 'package:driver_app/features/auth/presentation/providers/auth_provider.dart';
-import 'package:driver_app/features/main/presentation/screens/main_app_screen.dart';
+import 'package:driver_app/core/providers/auth_provider.dart';
+import 'package:driver_app/features/auth/presentation/providers/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-class LoginScreen extends StatelessWidget {
-  final userNameController = TextEditingController();
-  final idController = TextEditingController();
-
-  LoginScreen({super.key});
+class LoginScreen extends ConsumerWidget {
+  const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userNameController = TextEditingController();
+    final idController = TextEditingController();
+    final notifier = ref.read(authProvider.notifier);
+  final state = ref.watch(authProvider);
+
+  ref.listen<AuthState>(authProvider, (previous, next) {
+    if (next.user != null && previous?.user == null) {
+      context.go("/main/rides/list");
+    }
+  });
     return Scaffold(
       backgroundColor: const Color(0xFFEFF3F6),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
-          child: Consumer<AuthProvider>(
-            builder: (context, provider, child) {
-              if (provider.user != null) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (_) => MainAppScreen()),
-                  );
-                });
-              }
+          child: Builder(
+            builder: (context) {
 
               return Card(
                 elevation: 8,
@@ -40,9 +40,8 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       Text(
                         "התחברות לדרייבר 10",
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                        style: Theme.of(context).textTheme.headlineSmall
+                            ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 24),
                       TextField(
@@ -60,8 +59,8 @@ class LoginScreen extends StatelessWidget {
                         controller: idController,
                         keyboardType: TextInputType.number,
                         inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly, 
-                          LengthLimitingTextInputFormatter(10),   
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(10),
                         ],
                         decoration: const InputDecoration(
                           labelText: "ID",
@@ -70,30 +69,33 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      provider.isLoading
+                      state.isLoading
                           ? const CircularProgressIndicator()
                           : SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton.icon(
-                                key: const Key("loginButton"),
-                                icon: const Icon(Icons.login),
-                                label: const Text("התחבר"),
-                                onPressed: () => provider.login(
-                                  userNameController.text,
-                                  idController.text,
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
+                            width: double.infinity,
+                            child: ElevatedButton.icon(
+                              key: const Key("loginButton"),
+                              icon: const Icon(Icons.login),
+                              label: const Text("התחבר"),
+                              onPressed:
+                                  () => notifier.login(
+                                    userNameController.text,
+                                    idController.text,
                                   ),
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 16,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
                               ),
                             ),
-                      if (provider.errorMessage != null) ...[
+                          ),
+                      if (state.errorMessage != null) ...[
                         const SizedBox(height: 16),
                         Text(
-                          "⚠ ${provider.errorMessage}",
+                          "⚠ ${state.errorMessage}",
                           style: const TextStyle(color: Colors.red),
                         ),
                       ],

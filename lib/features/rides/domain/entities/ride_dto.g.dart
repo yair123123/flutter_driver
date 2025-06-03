@@ -8,9 +8,14 @@ part of 'ride_dto.dart';
 
 _$RideDtoImpl _$$RideDtoImplFromJson(Map<String, dynamic> json) =>
     _$RideDtoImpl(
-      type: json['type'] as String,
-      ride: Ride.fromJson(json['ride'] as Map<String, dynamic>),
+      typeCode: (json['typeCode'] as num).toInt(),
+      content: json['content'],
+      error: json['error'] as String,
     );
 
 Map<String, dynamic> _$$RideDtoImplToJson(_$RideDtoImpl instance) =>
-    <String, dynamic>{'type': instance.type, 'ride': instance.ride};
+    <String, dynamic>{
+      'typeCode': instance.typeCode,
+      'content': instance.content,
+      'error': instance.error,
+    };

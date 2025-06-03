@@ -1,26 +1,30 @@
 import 'package:driver_app/core/settings/domain/entities/settings_entity.dart';
 import 'package:driver_app/core/settings/domain/use_cases/get_settings.dart';
 import 'package:driver_app/core/settings/domain/use_cases/set_settings.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SettingsProvider extends ChangeNotifier{
+class SettingsNotifier extends StateNotifier<AsyncValue<Settings>> {
   final GetSettings getSettings;
   final SetSettings setSettings;
-  Settings _settings = Settings(isDarkMode: false);
-  SettingsProvider(this.getSettings,this.setSettings){
+  SettingsNotifier(this.getSettings,this.setSettings) : super(const AsyncValue.loading()){
     _loadSettings();
   }
-  Settings get settings => _settings; 
 
   Future<void> _loadSettings() async {
-    _settings = await getSettings();
-    notifyListeners();
+    final settings = await getSettings();
+      state = AsyncValue.data(settings);
   }
 
-  Future<void> updateDarkMode(bool isDarkMode) async {
-    _settings = Settings(isDarkMode: isDarkMode);
-    await setSettings(_settings);
-    notifyListeners();
+Future<void> updateDarkMode(bool isDarkMode) async {
+  if (state.value == null) return;
+  try {
+    state = const AsyncValue.loading();
+    final updated = state.value!.copyWith(isDarkMode: isDarkMode);
+    await setSettings(updated);
+    state = AsyncValue.data(updated);
+  } catch (e, st) {
+    state = AsyncValue.error(e, st);
   }
+}
 
 }
