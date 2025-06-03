@@ -3,7 +3,6 @@ import 'package:driver_app/core/http/http_response_handler.dart';
 import 'package:driver_app/features/auth/domain/entities/auth_user.dart';
 import 'package:http/http.dart' as http;
 
-
 class AuthRemoteDatasource {
   final String url;
   AuthRemoteDatasource(this.url);
@@ -14,7 +13,10 @@ class AuthRemoteDatasource {
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'username': username, 'driver_key': id}),
       );
-      return responseHandler(response);
+      return responseHandler<AuthUser>(
+        response,
+        (json) => AuthUser.fromJson(json as Map<String, dynamic>),
+      );
     } catch (e) {
       return Future.error("שגיאת תקשורת: $e");
     }

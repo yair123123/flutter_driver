@@ -1,3 +1,4 @@
+import 'package:driver_app/core/env/env_web.dart';
 import 'package:driver_app/features/main/data/data_sources/user_data_source.dart';
 import 'package:driver_app/features/main/data/repositories/user_repository_impl.dart';
 import 'package:driver_app/features/main/domein/entities/user.dart';
@@ -7,7 +8,7 @@ import 'package:driver_app/features/main/presentation/providers/user_provider.da
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userDataSource = Provider<UserDataSource>((ref) {
-  return UserDataSource("df");
+  return UserDataSource(Env.authUrl);
 });
 
 final userRepositoryProvider = Provider<UserRepository>((ref) {

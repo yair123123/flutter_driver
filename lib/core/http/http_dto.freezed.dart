@@ -15,36 +15,41 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
-HttpDto _$HttpDtoFromJson(Map<String, dynamic> json) {
-  return _HttpDto.fromJson(json);
+HttpDto<T> _$HttpDtoFromJson<T>(
+  Map<String, dynamic> json,
+  T Function(Object?) fromJsonT,
+) {
+  return _HttpDto<T>.fromJson(json, fromJsonT);
 }
 
 /// @nodoc
-mixin _$HttpDto {
-  dynamic get content => throw _privateConstructorUsedError;
+mixin _$HttpDto<T> {
+  T get content => throw _privateConstructorUsedError;
   bool get success => throw _privateConstructorUsedError;
   String get error => throw _privateConstructorUsedError;
 
   /// Serializes this HttpDto to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson(Object? Function(T) toJsonT) =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of HttpDto
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $HttpDtoCopyWith<HttpDto> get copyWith => throw _privateConstructorUsedError;
+  $HttpDtoCopyWith<T, HttpDto<T>> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HttpDtoCopyWith<$Res> {
-  factory $HttpDtoCopyWith(HttpDto value, $Res Function(HttpDto) then) =
-      _$HttpDtoCopyWithImpl<$Res, HttpDto>;
+abstract class $HttpDtoCopyWith<T, $Res> {
+  factory $HttpDtoCopyWith(HttpDto<T> value, $Res Function(HttpDto<T>) then) =
+      _$HttpDtoCopyWithImpl<T, $Res, HttpDto<T>>;
   @useResult
-  $Res call({dynamic content, bool success, String error});
+  $Res call({T content, bool success, String error});
 }
 
 /// @nodoc
-class _$HttpDtoCopyWithImpl<$Res, $Val extends HttpDto>
-    implements $HttpDtoCopyWith<$Res> {
+class _$HttpDtoCopyWithImpl<T, $Res, $Val extends HttpDto<T>>
+    implements $HttpDtoCopyWith<T, $Res> {
   _$HttpDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -67,7 +72,7 @@ class _$HttpDtoCopyWithImpl<$Res, $Val extends HttpDto>
                 freezed == content
                     ? _value.content
                     : content // ignore: cast_nullable_to_non_nullable
-                        as dynamic,
+                        as T,
             success:
                 null == success
                     ? _value.success
@@ -85,23 +90,24 @@ class _$HttpDtoCopyWithImpl<$Res, $Val extends HttpDto>
 }
 
 /// @nodoc
-abstract class _$$HttpDtoImplCopyWith<$Res> implements $HttpDtoCopyWith<$Res> {
+abstract class _$$HttpDtoImplCopyWith<T, $Res>
+    implements $HttpDtoCopyWith<T, $Res> {
   factory _$$HttpDtoImplCopyWith(
-    _$HttpDtoImpl value,
-    $Res Function(_$HttpDtoImpl) then,
-  ) = __$$HttpDtoImplCopyWithImpl<$Res>;
+    _$HttpDtoImpl<T> value,
+    $Res Function(_$HttpDtoImpl<T>) then,
+  ) = __$$HttpDtoImplCopyWithImpl<T, $Res>;
   @override
   @useResult
-  $Res call({dynamic content, bool success, String error});
+  $Res call({T content, bool success, String error});
 }
 
 /// @nodoc
-class __$$HttpDtoImplCopyWithImpl<$Res>
-    extends _$HttpDtoCopyWithImpl<$Res, _$HttpDtoImpl>
-    implements _$$HttpDtoImplCopyWith<$Res> {
+class __$$HttpDtoImplCopyWithImpl<T, $Res>
+    extends _$HttpDtoCopyWithImpl<T, $Res, _$HttpDtoImpl<T>>
+    implements _$$HttpDtoImplCopyWith<T, $Res> {
   __$$HttpDtoImplCopyWithImpl(
-    _$HttpDtoImpl _value,
-    $Res Function(_$HttpDtoImpl) _then,
+    _$HttpDtoImpl<T> _value,
+    $Res Function(_$HttpDtoImpl<T>) _then,
   ) : super(_value, _then);
 
   /// Create a copy of HttpDto
@@ -114,12 +120,12 @@ class __$$HttpDtoImplCopyWithImpl<$Res>
     Object? error = null,
   }) {
     return _then(
-      _$HttpDtoImpl(
+      _$HttpDtoImpl<T>(
         content:
             freezed == content
                 ? _value.content
                 : content // ignore: cast_nullable_to_non_nullable
-                    as dynamic,
+                    as T,
         success:
             null == success
                 ? _value.success
@@ -136,19 +142,21 @@ class __$$HttpDtoImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$HttpDtoImpl implements _HttpDto {
+@JsonSerializable(genericArgumentFactories: true)
+class _$HttpDtoImpl<T> implements _HttpDto<T> {
   const _$HttpDtoImpl({
-    this.content,
+    required this.content,
     required this.success,
     required this.error,
   });
 
-  factory _$HttpDtoImpl.fromJson(Map<String, dynamic> json) =>
-      _$$HttpDtoImplFromJson(json);
+  factory _$HttpDtoImpl.fromJson(
+    Map<String, dynamic> json,
+    T Function(Object?) fromJsonT,
+  ) => _$$HttpDtoImplFromJson(json, fromJsonT);
 
   @override
-  final dynamic content;
+  final T content;
   @override
   final bool success;
   @override
@@ -156,14 +164,14 @@ class _$HttpDtoImpl implements _HttpDto {
 
   @override
   String toString() {
-    return 'HttpDto(content: $content, success: $success, error: $error)';
+    return 'HttpDto<$T>(content: $content, success: $success, error: $error)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HttpDtoImpl &&
+            other is _$HttpDtoImpl<T> &&
             const DeepCollectionEquality().equals(other.content, content) &&
             (identical(other.success, success) || other.success == success) &&
             (identical(other.error, error) || other.error == error));
@@ -183,26 +191,29 @@ class _$HttpDtoImpl implements _HttpDto {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$HttpDtoImplCopyWith<_$HttpDtoImpl> get copyWith =>
-      __$$HttpDtoImplCopyWithImpl<_$HttpDtoImpl>(this, _$identity);
+  _$$HttpDtoImplCopyWith<T, _$HttpDtoImpl<T>> get copyWith =>
+      __$$HttpDtoImplCopyWithImpl<T, _$HttpDtoImpl<T>>(this, _$identity);
 
   @override
-  Map<String, dynamic> toJson() {
-    return _$$HttpDtoImplToJson(this);
+  Map<String, dynamic> toJson(Object? Function(T) toJsonT) {
+    return _$$HttpDtoImplToJson<T>(this, toJsonT);
   }
 }
 
-abstract class _HttpDto implements HttpDto {
+abstract class _HttpDto<T> implements HttpDto<T> {
   const factory _HttpDto({
-    final dynamic content,
+    required final T content,
     required final bool success,
     required final String error,
-  }) = _$HttpDtoImpl;
+  }) = _$HttpDtoImpl<T>;
 
-  factory _HttpDto.fromJson(Map<String, dynamic> json) = _$HttpDtoImpl.fromJson;
+  factory _HttpDto.fromJson(
+    Map<String, dynamic> json,
+    T Function(Object?) fromJsonT,
+  ) = _$HttpDtoImpl<T>.fromJson;
 
   @override
-  dynamic get content;
+  T get content;
   @override
   bool get success;
   @override
@@ -212,6 +223,6 @@ abstract class _HttpDto implements HttpDto {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$HttpDtoImplCopyWith<_$HttpDtoImpl> get copyWith =>
+  _$$HttpDtoImplCopyWith<T, _$HttpDtoImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -3,14 +3,16 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'http_dto.freezed.dart';
 part 'http_dto.g.dart';
 
-@freezed
-class HttpDto with _$HttpDto {
+@Freezed(genericArgumentFactories: true)
+class HttpDto<T> with _$HttpDto<T> {
   const factory HttpDto({
-    dynamic content,
+    required T content,
     required bool success,
     required String error,
-  }) = _HttpDto;
+  }) = _HttpDto<T>;
 
-  factory HttpDto.fromJson(Map<String, dynamic> json) =>
-      _$HttpDtoFromJson(json);
+  factory HttpDto.fromJson(
+    Map<String, dynamic> json,
+    T Function(Object?) fromJsonT,
+  ) => _$HttpDtoFromJson(json, fromJsonT);
 }

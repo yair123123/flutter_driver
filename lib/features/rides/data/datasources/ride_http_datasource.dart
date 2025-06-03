@@ -8,11 +8,15 @@ class RideHttpDatasource {
   Future<List<Group>> initGroups (String jwt) async{
     try {
       final res = await http.get(
-        Uri.http("api/rides/init-groups"),
+        Uri.http(url,"api/rides/init-groups"),
         headers: {"auth": jwt}
       );
-    return responseHandler(res) as Future<List<Group>>;
+    return responseHandler(res,fromJsonT );
     } catch (e) {
       return Future.error("שגיאת תקשורת $e");
     }}
+    List<Group> fromJsonT(Object? json) {
+  final list = json as List;
+  return list.map((e) => Group.fromJson(e as Map<String, dynamic>)).toList();
+}
   }
