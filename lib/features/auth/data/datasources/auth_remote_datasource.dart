@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:driver_app/core/http/http_response_handler.dart';
 import 'package:driver_app/features/auth/domain/entities/auth_user.dart';
 import 'package:http/http.dart' as http;
