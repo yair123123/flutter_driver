@@ -46,7 +46,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                     path: 'group/:groupId',
                     builder: (context, state) {
                       final groupId = state.pathParameters['groupId'];
-                      return GroupChatScreen(groupId: groupId!);
+                      return GroupChatScreen(groupId: int.parse(groupId!));
                     },
                   ),
                 ],

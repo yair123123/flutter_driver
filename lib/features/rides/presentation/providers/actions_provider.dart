@@ -9,7 +9,7 @@ class RidesActionsNotifier extends StateNotifier<AsyncValue<void>> {
   Future<void> giveRide(int rideId) async {
     state = const AsyncLoading();
     try {
-      await _repo.takeRide({"id":rideId}); // פונה לשרת/WS ושולח פעולה
+      await _repo.takeRide({"id":rideId});
       state = const AsyncData(null);
     } catch (e, st) {
       state = AsyncError(e, st);

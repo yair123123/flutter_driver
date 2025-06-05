@@ -28,8 +28,8 @@ class _AddRideScrean extends ConsumerState<AddRideScreen> {
   @override
   Widget build(BuildContext context) {
     final dispatchState = ref.watch(dispatchNotifierProvider);
-    final currentIndex = dispatchState.value!.indexCurrentLine;
-    final currentField = fieldNames[currentIndex];
+    final currentIndex = dispatchState.value?.indexCurrentLine;
+    final currentField = fieldNames[currentIndex ?? 0] ;
     final notifier = ref.read(dispatchNotifierProvider.notifier);
     
     return Scaffold(
@@ -79,7 +79,7 @@ class _AddRideScrean extends ConsumerState<AddRideScreen> {
               onPressed: notifier.addRide,
               child: const Text('פרסם נסיעה'),
             ),
-            if(dispatchState.value!.errorMessage != "")
+            if(dispatchState.value?.errorMessage != "")
             Text(dispatchState.value!.errorMessage)
 
             

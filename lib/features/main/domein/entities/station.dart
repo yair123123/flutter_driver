@@ -1,3 +1,4 @@
+import 'package:driver_app/features/rides/domain/entities/ride.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'station.freezed.dart';
@@ -8,7 +9,7 @@ class Station with _$Station {
   const factory Station({
     required int station_id,
     required String station_name,
-    String? driver_status_name,
+    @Default([]) List<Ride> rides,
   }) = _Station;
 
   factory Station.fromJson(Map<String, dynamic> json) =>

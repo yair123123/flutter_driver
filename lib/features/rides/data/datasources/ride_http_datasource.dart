@@ -1,11 +1,11 @@
 import 'package:driver_app/core/http/http_response_handler.dart';
-import 'package:driver_app/features/rides/domain/entities/group.dart';
+import 'package:driver_app/features/main/domein/entities/station.dart';
 import 'package:http/http.dart' as http;
 
 class RideHttpDatasource {
   final String url;
   RideHttpDatasource(this.url);
-  Future<List<Group>> initGroups (String jwt) async{
+  Future<List<Station>> initGroups (String jwt) async{
     try {
       final res = await http.get(
         Uri.http(url,"api/rides/init-groups"),
@@ -15,8 +15,8 @@ class RideHttpDatasource {
     } catch (e) {
       return Future.error("שגיאת תקשורת $e");
     }}
-    List<Group> fromJsonT(Object? json) {
+    List<Station> fromJsonT(Object? json) {
   final list = json as List;
-  return list.map((e) => Group.fromJson(e as Map<String, dynamic>)).toList();
+  return list.map((e) => Station.fromJson(e as Map<String, dynamic>)).toList();
 }
   }
