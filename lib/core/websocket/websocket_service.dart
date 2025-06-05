@@ -47,8 +47,13 @@ class WebSocketService {
         .cast<WebSocketDto>();
   }
 
-  void send(WebSocketDto message) {
-    _channel?.sink.add(webSocketDtoToJson(message));
+  String send(WebSocketDto message) {
+    try {
+      _channel!.sink.add(message);
+      return "";
+    } catch (e) {
+      return e.toString();
+    }
   }
 
   void disconnect() {

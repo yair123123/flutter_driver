@@ -1,5 +1,5 @@
 import 'package:driver_app/features/rides/domain/repositories/ride_websocket_repository.dart';
-import 'package:driver_app/features/rides/presentation/providers/rides_providers.dart';
+import 'package:driver_app/core/providers/rides_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class RidesActionsNotifier extends StateNotifier<AsyncValue<void>> {

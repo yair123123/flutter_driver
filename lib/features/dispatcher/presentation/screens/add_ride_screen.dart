@@ -1,3 +1,4 @@
+import 'package:driver_app/core/providers/dispatch_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -26,35 +27,18 @@ class _AddRideScrean extends ConsumerState<AddRideScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final lines = controller.text.split("\n");
-    final currentIndex = (lines.length - 1).clamp(0, 4);
+    final dispatchState = ref.watch(dispatchNotifierProvider);
+    final currentIndex = dispatchState.value!.indexCurrentLine;
     final currentField = fieldNames[currentIndex];
+    final notifier = ref.read(dispatchNotifierProvider.notifier);
+    
     return Scaffold(
       appBar: AppBar(title: Text("פרסום נסיעה")),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "נא להקליד כל פרט בשורה נפרדת לפי הסדר ",
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              '1. מוצא\n2. יעד\n3. מחיר\n4. טלפון\n5. פרטים נוספים',
-              style: TextStyle(color: Colors.grey[700]),
-            ),
-            TextField(
-              controller: controller,
-              decoration: const InputDecoration(
-                labelText: "פרטי נסיעה",
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.multiline,
-              maxLines: 8,
-              onChanged: (_) => setState(() {}),
-            ),
-            const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.all(12),
               width: double.infinity,
@@ -71,24 +55,37 @@ class _AddRideScrean extends ConsumerState<AddRideScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            Expanded(
-              child: Center(
-                child: Text(
-                  'כאן נוסיף תבניות מוכנות בהמשך 🚀',
-                  style: TextStyle(color: Colors.grey[600]),
-                ),
+            TextField(
+              controller: controller,
+              decoration: const InputDecoration(
+                labelText: "פרטי נסיעה",
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.multiline,
+              maxLines: 8,
+              onChanged: (value) {
+                notifier.onChange(controller);
+              },
+            ),
+            const SizedBox(height: 16),
+            Center(
+              child: Text(
+                'כאן נוסיף תבניות מוכנות בהמשך 🚀',
+                style: TextStyle(color: Colors.grey[600]),
               ),
             ),
+            const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: _publishRide,
+              onPressed: notifier.addRide,
               child: const Text('פרסם נסיעה'),
             ),
+            if(dispatchState.value!.errorMessage != "")
+            Text(dispatchState.value!.errorMessage)
+
+            
           ],
         ),
       ),
     );
   }
-  void _publishRide() {
-  }
-
 }

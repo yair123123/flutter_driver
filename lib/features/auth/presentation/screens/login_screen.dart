@@ -17,7 +17,7 @@ class LoginScreen extends ConsumerWidget {
 
   ref.listen<AuthState>(authProvider, (previous, next) {
     if (next.user != null && previous?.user == null) {
-      context.go("/main/rides/list");
+      context.go("/rides/list");
     }
   });
     return Scaffold(

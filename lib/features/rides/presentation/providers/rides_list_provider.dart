@@ -4,7 +4,7 @@ import 'package:driver_app/features/rides/data/repositories/ride_http_repository
 import 'package:driver_app/features/rides/domain/entities/group.dart';
 import 'package:driver_app/features/rides/domain/entities/ride.dart';
 import 'package:driver_app/features/rides/domain/usecases/fetch_groups_usecase.dart';
-import 'package:driver_app/features/rides/presentation/providers/rides_providers.dart';
+import 'package:driver_app/core/providers/rides_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class GroupsNotifier extends StateNotifier<List<Group>> {
@@ -14,6 +14,7 @@ class GroupsNotifier extends StateNotifier<List<Group>> {
     final groups = await fetchGroups.rideHttpRepository.fetchGroups(jwt);
     setGroups(groups);
   }
+
   void addRideToGroup(Ride ride, int groupId) {}
   void removeRideFromGroup(int rideId) {}
   void setGroups(List<Group> groups) {
@@ -21,14 +22,14 @@ class GroupsNotifier extends StateNotifier<List<Group>> {
   }
 }
 
-final groupsProvider = StateNotifierProvider<GroupsNotifier, List<Group>>(
-  (ref)  {
-    final apiDatasource = RideHttpDatasource(Env.authUrl);
+final groupsProvider = StateNotifierProvider<GroupsNotifier, List<Group>>((
+  ref,
+) {
+  final apiDatasource = RideHttpDatasource(Env.authUrl);
   final repo = RideHttpRepositoryImpl(apiDatasource);
   final fetchGroupsUsecase = FetchGroupsUsecase(repo);
   return GroupsNotifier(fetchGroupsUsecase);
-  },
-);
+});
 
 final rideEventsListenerProvider = Provider<void>((ref) {
   ref.listen<AsyncValue<Ride>>(publishedRidesProvider, (prev, asyncRide) {
