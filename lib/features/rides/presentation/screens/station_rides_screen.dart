@@ -1,18 +1,19 @@
+
 import 'package:driver_app/features/rides/presentation/providers/actions_provider.dart';
 import 'package:driver_app/features/rides/presentation/providers/rides_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class GroupChatScreen extends ConsumerWidget {
-  final String groupId;
+  final int groupId;
 
   const GroupChatScreen({super.key, required this.groupId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final group = ref.watch(groupsProvider).firstWhere((g) => g.id == groupId);
+    final group = ref.watch(groupsProvider).firstWhere((g) => g.station_id == groupId);
     return Scaffold(
-      appBar: AppBar(title: Text(group.name)),
+      appBar: AppBar(title: Text(group.station_name)),
       body:
           group.rides.isEmpty
               ? const Center(child: Text('אין הודעות להצגה.'))

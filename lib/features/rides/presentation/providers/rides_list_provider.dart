@@ -1,34 +1,24 @@
-import 'package:driver_app/core/env/env.dart';
-import 'package:driver_app/features/rides/data/datasources/ride_http_datasource.dart';
-import 'package:driver_app/features/rides/data/repositories/ride_http_repository_impl.dart';
-import 'package:driver_app/features/rides/domain/entities/group.dart';
+import 'package:driver_app/core/providers/user_provider.dart';
+import 'package:driver_app/features/main/domein/entities/station.dart';
+
 import 'package:driver_app/features/rides/domain/entities/ride.dart';
-import 'package:driver_app/features/rides/domain/usecases/fetch_groups_usecase.dart';
 import 'package:driver_app/core/providers/rides_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class GroupsNotifier extends StateNotifier<List<Group>> {
-  final FetchGroupsUsecase fetchGroups;
-  GroupsNotifier(this.fetchGroups) : super([]);
-  Future<void> fetchAndInitGroups(String jwt) async {
-    final groups = await fetchGroups.rideHttpRepository.fetchGroups(jwt);
-    setGroups(groups);
-  }
-
+class GroupsNotifier extends StateNotifier<List<Station>> {
+  GroupsNotifier() : super([]);
+  
   void addRideToGroup(Ride ride, int groupId) {}
   void removeRideFromGroup(int rideId) {}
-  void setGroups(List<Group> groups) {
-    state = List<Group>.from(groups);
+  void setGroups(List<Station> groups) {
+    state = List<Station>.from(groups);
   }
 }
 
-final groupsProvider = StateNotifierProvider<GroupsNotifier, List<Group>>((
-  ref,
-) {
-  final apiDatasource = RideHttpDatasource(Env.authUrl);
-  final repo = RideHttpRepositoryImpl(apiDatasource);
-  final fetchGroupsUsecase = FetchGroupsUsecase(repo);
-  return GroupsNotifier(fetchGroupsUsecase);
+final groupsProvider = StateNotifierProvider<GroupsNotifier, List<Station>>((ref) {
+  final user = ref.watch(userProvider).value;
+  final initialGroups = user?.driver_stations ?? [];
+  return GroupsNotifier()..setGroups(initialGroups);
 });
 
 final rideEventsListenerProvider = Provider<void>((ref) {

@@ -23,7 +23,7 @@ Station _$StationFromJson(Map<String, dynamic> json) {
 mixin _$Station {
   int get station_id => throw _privateConstructorUsedError;
   String get station_name => throw _privateConstructorUsedError;
-  String? get driver_status_name => throw _privateConstructorUsedError;
+  List<Ride> get rides => throw _privateConstructorUsedError;
 
   /// Serializes this Station to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $StationCopyWith<$Res> {
   factory $StationCopyWith(Station value, $Res Function(Station) then) =
       _$StationCopyWithImpl<$Res, Station>;
   @useResult
-  $Res call({int station_id, String station_name, String? driver_status_name});
+  $Res call({int station_id, String station_name, List<Ride> rides});
 }
 
 /// @nodoc
@@ -59,7 +59,7 @@ class _$StationCopyWithImpl<$Res, $Val extends Station>
   $Res call({
     Object? station_id = null,
     Object? station_name = null,
-    Object? driver_status_name = freezed,
+    Object? rides = null,
   }) {
     return _then(
       _value.copyWith(
@@ -73,11 +73,11 @@ class _$StationCopyWithImpl<$Res, $Val extends Station>
                     ? _value.station_name
                     : station_name // ignore: cast_nullable_to_non_nullable
                         as String,
-            driver_status_name:
-                freezed == driver_status_name
-                    ? _value.driver_status_name
-                    : driver_status_name // ignore: cast_nullable_to_non_nullable
-                        as String?,
+            rides:
+                null == rides
+                    ? _value.rides
+                    : rides // ignore: cast_nullable_to_non_nullable
+                        as List<Ride>,
           )
           as $Val,
     );
@@ -92,7 +92,7 @@ abstract class _$$StationImplCopyWith<$Res> implements $StationCopyWith<$Res> {
   ) = __$$StationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int station_id, String station_name, String? driver_status_name});
+  $Res call({int station_id, String station_name, List<Ride> rides});
 }
 
 /// @nodoc
@@ -111,7 +111,7 @@ class __$$StationImplCopyWithImpl<$Res>
   $Res call({
     Object? station_id = null,
     Object? station_name = null,
-    Object? driver_status_name = freezed,
+    Object? rides = null,
   }) {
     return _then(
       _$StationImpl(
@@ -125,11 +125,11 @@ class __$$StationImplCopyWithImpl<$Res>
                 ? _value.station_name
                 : station_name // ignore: cast_nullable_to_non_nullable
                     as String,
-        driver_status_name:
-            freezed == driver_status_name
-                ? _value.driver_status_name
-                : driver_status_name // ignore: cast_nullable_to_non_nullable
-                    as String?,
+        rides:
+            null == rides
+                ? _value._rides
+                : rides // ignore: cast_nullable_to_non_nullable
+                    as List<Ride>,
       ),
     );
   }
@@ -141,8 +141,8 @@ class _$StationImpl implements _Station {
   const _$StationImpl({
     required this.station_id,
     required this.station_name,
-    this.driver_status_name,
-  });
+    final List<Ride> rides = const [],
+  }) : _rides = rides;
 
   factory _$StationImpl.fromJson(Map<String, dynamic> json) =>
       _$$StationImplFromJson(json);
@@ -151,12 +151,18 @@ class _$StationImpl implements _Station {
   final int station_id;
   @override
   final String station_name;
+  final List<Ride> _rides;
   @override
-  final String? driver_status_name;
+  @JsonKey()
+  List<Ride> get rides {
+    if (_rides is EqualUnmodifiableListView) return _rides;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_rides);
+  }
 
   @override
   String toString() {
-    return 'Station(station_id: $station_id, station_name: $station_name, driver_status_name: $driver_status_name)';
+    return 'Station(station_id: $station_id, station_name: $station_name, rides: $rides)';
   }
 
   @override
@@ -168,14 +174,17 @@ class _$StationImpl implements _Station {
                 other.station_id == station_id) &&
             (identical(other.station_name, station_name) ||
                 other.station_name == station_name) &&
-            (identical(other.driver_status_name, driver_status_name) ||
-                other.driver_status_name == driver_status_name));
+            const DeepCollectionEquality().equals(other._rides, _rides));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, station_id, station_name, driver_status_name);
+  int get hashCode => Object.hash(
+    runtimeType,
+    station_id,
+    station_name,
+    const DeepCollectionEquality().hash(_rides),
+  );
 
   /// Create a copy of Station
   /// with the given fields replaced by the non-null parameter values.
@@ -195,7 +204,7 @@ abstract class _Station implements Station {
   const factory _Station({
     required final int station_id,
     required final String station_name,
-    final String? driver_status_name,
+    final List<Ride> rides,
   }) = _$StationImpl;
 
   factory _Station.fromJson(Map<String, dynamic> json) = _$StationImpl.fromJson;
@@ -205,7 +214,7 @@ abstract class _Station implements Station {
   @override
   String get station_name;
   @override
-  String? get driver_status_name;
+  List<Ride> get rides;
 
   /// Create a copy of Station
   /// with the given fields replaced by the non-null parameter values.
