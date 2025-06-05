@@ -16,7 +16,7 @@ class WebSocketService {
   bool get isConnected => _isConnected;
   void connect(String url, String token) {
     if (_isConnected) return;
-    _channel = WebSocketChannel.connect(Uri.parse("$url/$token"));
+    _channel = WebSocketChannel.connect(Uri.parse("$url/?token=$token"));
     _isConnected = true;
 
     _channel!.stream.listen(
@@ -30,7 +30,10 @@ class WebSocketService {
       },
     );
   }
-
+  void dispose() {
+    disconnect();
+    _controller.close();
+  }
   Stream<WebSocketDto> get webSocketDto {
     return stream
         .map((rawMessage) {
@@ -47,8 +50,13 @@ class WebSocketService {
         .cast<WebSocketDto>();
   }
 
-  void send(WebSocketDto message) {
-    _channel?.sink.add(webSocketDtoToJson(message));
+  String send(WebSocketDto message) {
+    try {
+      _channel!.sink.add(message);
+      return "";
+    } catch (e) {
+      return e.toString();
+    }
   }
 
   void disconnect() {

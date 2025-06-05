@@ -15,7 +15,7 @@ class SplashScreen extends ConsumerWidget {
           
           break;
         case AuthSplashStatus.success:
-          context.go('/main/rides/list');
+          context.go('/rides/list');
           return ;
         case AuthSplashStatus.needLogin:
           context.go('/login');

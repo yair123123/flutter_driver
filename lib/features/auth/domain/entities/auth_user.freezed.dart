@@ -158,7 +158,7 @@ class _$AuthUserImpl implements _AuthUser {
 
   @override
   String toString() {
-    return 'AuthUser(driver_key: $login_key, username: $username, jwt_token: $jwt_token)';
+    return 'AuthUser(login_key: $login_key, username: $username, jwt_token: $jwt_token)';
   }
 
   @override
