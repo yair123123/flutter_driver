@@ -27,7 +27,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<void> login(String username, String id) async {
     state = state.copyWith(errorMessage: null, isLoading: true);
     try {
-      final user = await loginUseCase(id, username);
+      final user = await loginUseCase(username, id);
       state = state.copyWith(
         user: user,
         token: user.jwt_token,

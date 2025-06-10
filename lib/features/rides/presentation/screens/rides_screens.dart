@@ -32,9 +32,9 @@ class _RidesScreensState extends State<RidesScreens> {
 
   void _onTap(int index, BuildContext context) {
     if (index == 0) {
-      context.go('/main/rides/list');
+      context.go('/rides/list');
     } else {
-      context.go('/main/rides/map');
+      context.go('/rides/map');
     }
   }
 

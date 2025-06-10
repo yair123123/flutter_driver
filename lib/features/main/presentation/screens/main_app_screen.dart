@@ -2,7 +2,7 @@ import 'package:driver_app/core/providers/auth_provider.dart';
 import 'package:driver_app/core/providers/user_provider.dart';
 import 'package:driver_app/core/settings/presentation/screens/settings_screen.dart';
 import 'package:driver_app/features/chat/presentation/screens/list_chats_screen.dart';
-import 'package:driver_app/features/dispatcher/presentation/screens/summary_dispatches_screen.dart';
+import 'package:driver_app/features/dispatcher/presentation/screens/shell_dispatch.dart';
 
 import 'package:driver_app/features/main/domein/entities/user.dart';
 import 'package:driver_app/features/rides/presentation/screens/rides_screens.dart';
@@ -60,15 +60,15 @@ int getTabIndex(BuildContext context, User user,List<String> routes ) {
 
         final List<Widget> screens = [
           const RidesScreens(),
-          if (user.is_dispatcher) const SummaryDispatchesScreen(),
+          if (user.is_dispatcher) const ShellDispatch(),
           const ListChatsScreen(),
           const SettingsScreen(),
         ];
         final routes = [
-          "/main/rides/list",
-          if (user.is_dispatcher) "/main/dispatcher/summary",
-          "/main/chats",
-          "/main/settings",
+          "/rides/list",
+          if (user.is_dispatcher) "/dispatcher/newRide",
+          "/chats",
+          "/settings",
         ];
         final navItems = [
           const BottomNavigationBarItem(

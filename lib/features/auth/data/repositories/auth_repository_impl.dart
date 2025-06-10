@@ -9,9 +9,9 @@ class AuthRepositoryImpl  implements AuthRepository{
   AuthRepositoryImpl(this.remote,this.local);
 
   @override
-  Future<AuthUser> login(String id, String username) async {
+  Future<AuthUser> login(String username, String id) async {
 
-    AuthUser user =  await remote.login(id, username);
+    AuthUser user =  await remote.login(username, id);
     local.saveToken(user.jwt_token);
     return user;
   }

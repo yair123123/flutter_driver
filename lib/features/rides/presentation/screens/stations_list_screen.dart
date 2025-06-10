@@ -1,4 +1,3 @@
-import 'package:driver_app/features/rides/presentation/providers/groups_init_provider.dart';
 import 'package:driver_app/features/rides/presentation/providers/rides_list_provider.dart';
 import 'package:driver_app/features/rides/presentation/screens/station_rides_screen.dart';
 import 'package:driver_app/widgets/vip_tag.dart';
@@ -10,15 +9,9 @@ class StationsListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-    final groupsInit = ref.watch(groupsInitProvider);
+    // final groupsInit = ref.watch(groupsInitProvider);
     ref.watch(rideEventsListenerProvider);
-
-        return groupsInit.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, _) => Center(child: Text('שגיאה בטעינת קבוצות: $e')),
-      data: (_) {
-        final groups = ref.watch(groupsProvider);
-      
+    final groups = ref.watch(groupsProvider);
         if (groups.isEmpty) {
           return const Center(child: Text('אין קבוצות להצגה.'));
         }
@@ -49,13 +42,15 @@ class StationsListScreen extends ConsumerWidget {
                     horizontal: 16,
                     vertical: 12,
                   ),
-                  title: Text(station.name),
-                  subtitle: Text(station.rides[0].details),
+                  title: Text(station.station_name),
+                    subtitle: Text(
+                    station.rides.isNotEmpty ? (station.rides[0].details) : '',
+                    ),
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => GroupChatScreen(groupId: station.id),
+                        builder: (_) => GroupChatScreen(groupId: station.station_id),
                       ),
                     );
                   },
@@ -66,4 +61,4 @@ class StationsListScreen extends ConsumerWidget {
             ),
           );
         },
-      );});}}
+       );}}

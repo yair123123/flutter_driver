@@ -1,5 +1,5 @@
-import 'package:driver_app/features/rides/domain/entities/group.dart';
+import 'package:driver_app/features/main/domein/entities/station.dart';
 
 abstract class RideHttpRepository {
-  Future<List<Group>> fetchGroups(String jwt);
+  Future<List<Station>> fetchGroups(String jwt);
 }
